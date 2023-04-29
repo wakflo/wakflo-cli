@@ -1,5 +1,3 @@
-![image](https://user-images.githubusercontent.com/63039748/164709140-8bb96d45-972e-4ac5-8e0e-ae566e673761.png)
-
 <p align="center">
   <img src="https://img.shields.io/badge/version-1.0.0--beta-green"> <img src="https://img.shields.io/github/license/wakflo/fleet?color=pink"> <img src="https://img.shields.io/tokei/lines/github/wakflo/fleet?color=white&label=lines%20of%20code"> <img src="https://img.shields.io/github/languages/top/wakflo/fleet?color=%230xfffff">
 </p>
@@ -7,10 +5,7 @@
 <br>
 
 
-[Fleet](https://fleet.rs) is a blazing fast build tool for Rust. Compiling with Fleet is up-to 5x faster than with `cargo`.
-
-**Note**: Since  Fleet is still under development, it might not be completely stable yet. Feel free to open any issues or bug reports at [issues](https://github.com/wakflo/fleet/issues/).
-
+[Wakflo](https://wakflo.ai) is a blazing fast build tool for Rust. Compiling with Wakflo is up-to 5x faster than with `cargo`.
 <br>
 
 # :zap: Installation
