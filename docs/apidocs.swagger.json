@@ -1,0 +1,2452 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "api/auth/v1/auth.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "Auth"
+    },
+    {
+      "name": "User"
+    },
+    {
+      "name": "Workflow"
+    },
+    {
+      "name": "Space"
+    },
+    {
+      "name": "Schema"
+    },
+    {
+      "name": "Category"
+    },
+    {
+      "name": "Task"
+    },
+    {
+      "name": "Organisation"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/auth/login": {
+      "post": {
+        "operationId": "Auth_Login",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1LoginReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1LoginRequestLoginBody"
+            }
+          }
+        ],
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/v1/auth/logout": {
+      "post": {
+        "operationId": "Auth_Logout",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1LogoutReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/v1/auth/session": {
+      "get": {
+        "operationId": "Auth_Session",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1SessionReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/v1/auth/signup": {
+      "post": {
+        "operationId": "Auth_Signup",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1SignupReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SignupRequestSignupBody"
+            }
+          }
+        ],
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/v1/auth/whoami": {
+      "get": {
+        "operationId": "Auth_WhoAmI",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1WhoAmIReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/v1/categories": {
+      "get": {
+        "operationId": "Category_ListCategory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListCategoryReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Category"
+        ]
+      },
+      "post": {
+        "operationId": "Category_CreateCategory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateCategoryReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Category"
+        ]
+      }
+    },
+    "/v1/categories/{categoryId}": {
+      "get": {
+        "operationId": "Category_GetCategory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetCategoryReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "categoryId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Category"
+        ]
+      },
+      "delete": {
+        "operationId": "Category_DeleteCategory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteCategoryReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "categoryId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Category"
+        ]
+      },
+      "patch": {
+        "operationId": "Category_UpdateCategory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateCategoryReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "categoryId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Category"
+        ]
+      }
+    },
+    "/v1/organisations": {
+      "get": {
+        "operationId": "Organisation_ListOrganisation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListOrganisationReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "Organisation"
+        ]
+      },
+      "post": {
+        "operationId": "Organisation_CreateOrganisation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateOrganisationReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateOrganisationRequestCreateOrganisationRequestBody"
+            }
+          }
+        ],
+        "tags": [
+          "Organisation"
+        ]
+      }
+    },
+    "/v1/organisations/{organisationId}": {
+      "get": {
+        "operationId": "Organisation_GetOrganisation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetOrganisationReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "organisationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Organisation"
+        ]
+      },
+      "delete": {
+        "operationId": "Organisation_DeleteOrganisation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteOrganisationReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "organisationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Organisation"
+        ]
+      },
+      "patch": {
+        "operationId": "Organisation_UpdateOrganisation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateOrganisationReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "organisationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateOrganisationRequestUpdateOrganisationRequestBody"
+            }
+          }
+        ],
+        "tags": [
+          "Organisation"
+        ]
+      }
+    },
+    "/v1/organisations/{organisationId}/members": {
+      "get": {
+        "operationId": "Organisation_ListOrganisationMember",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListOrganisationMemberReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "organisationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "Organisation"
+        ]
+      },
+      "post": {
+        "operationId": "Organisation_CreateOrganisationMember",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateOrganisationMemberReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "organisationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateOrganisationMemberRequestCreateOrganisationMemberBody"
+            }
+          },
+          {
+            "name": "memberId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Organisation"
+        ]
+      }
+    },
+    "/v1/organisations/{organisationId}/members/{memberId}": {
+      "delete": {
+        "operationId": "Organisation_DeleteOrganisationMember",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteOrganisationMemberReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "organisationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "memberId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Organisation"
+        ]
+      },
+      "patch": {
+        "operationId": "Organisation_UpdateOrganisationMember",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateOrganisationMemberReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "organisationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "memberId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateOrganisationMemberRequestUpdateOrganisationMemberBody"
+            }
+          }
+        ],
+        "tags": [
+          "Organisation"
+        ]
+      }
+    },
+    "/v1/organisations/{organisationId}/switch": {
+      "post": {
+        "operationId": "Organisation_SwitchOrganisation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1SwitchOrganisationReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "organisationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Organisation"
+        ]
+      }
+    },
+    "/v1/schemas": {
+      "get": {
+        "operationId": "Schema_ListSchema",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListSchemaReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Schema"
+        ]
+      },
+      "post": {
+        "operationId": "Schema_CreateSchema",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateSchemaReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateSchemaRequestCreateSchemaRequestBody"
+            }
+          }
+        ],
+        "tags": [
+          "Schema"
+        ]
+      }
+    },
+    "/v1/schemas/{schemaId}": {
+      "get": {
+        "operationId": "Schema_GetSchema",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetSchemaReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "schemaId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Schema"
+        ]
+      },
+      "delete": {
+        "operationId": "Schema_DeleteSchema",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteSchemaReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "schemaId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Schema"
+        ]
+      },
+      "patch": {
+        "operationId": "Schema_UpdateSchema",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateSchemaReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "schemaId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateSchemaRequestUpdateSchemaRequestBody"
+            }
+          }
+        ],
+        "tags": [
+          "Schema"
+        ]
+      }
+    },
+    "/v1/spaces": {
+      "get": {
+        "operationId": "Space_ListSpace",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListSpaceReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Space"
+        ]
+      },
+      "post": {
+        "operationId": "Space_CreateSpace",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateSpaceReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateSpaceRequestCreateSpaceRequestBody"
+            }
+          }
+        ],
+        "tags": [
+          "Space"
+        ]
+      }
+    },
+    "/v1/spaces/{spaceId}": {
+      "get": {
+        "operationId": "Space_GetSpace",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetSpaceReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "spaceId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Space"
+        ]
+      },
+      "delete": {
+        "operationId": "Space_DeleteSpace",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteSpaceReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "spaceId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Space"
+        ]
+      },
+      "patch": {
+        "operationId": "Space_UpdateSpace",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateSpaceReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "spaceId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateSpaceRequestUpdateSpaceRequestBody"
+            }
+          }
+        ],
+        "tags": [
+          "Space"
+        ]
+      }
+    },
+    "/v1/tasks": {
+      "get": {
+        "operationId": "Task_ListTask",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListTaskReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Task"
+        ]
+      },
+      "post": {
+        "operationId": "Task_CreateTask",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateTaskReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Task"
+        ]
+      }
+    },
+    "/v1/tasks/{taskId}": {
+      "get": {
+        "operationId": "Task_GetTask",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetTaskReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "taskId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Task"
+        ]
+      },
+      "delete": {
+        "operationId": "Task_DeleteTask",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteTaskReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "taskId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Task"
+        ]
+      },
+      "patch": {
+        "operationId": "Task_UpdateTask",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateTaskReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "taskId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Task"
+        ]
+      }
+    },
+    "/v1/users": {
+      "get": {
+        "operationId": "User_ListUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListUserReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "User"
+        ]
+      },
+      "post": {
+        "operationId": "User_CreateUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateUserReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateUserRequest"
+            }
+          }
+        ],
+        "tags": [
+          "User"
+        ]
+      },
+      "patch": {
+        "operationId": "User_UpdateUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateUserReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1UpdateUserRequest"
+            }
+          }
+        ],
+        "tags": [
+          "User"
+        ]
+      }
+    },
+    "/v1/users/{userId}": {
+      "get": {
+        "operationId": "User_GetUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetUserReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "User"
+        ]
+      },
+      "delete": {
+        "operationId": "User_DeleteUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteUserReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "User"
+        ]
+      }
+    },
+    "/v1/workflows": {
+      "get": {
+        "operationId": "Workflow_ListWorkflow",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListWorkflowReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Workflow"
+        ]
+      },
+      "post": {
+        "operationId": "Workflow_CreateWorkflow",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateWorkflowReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateWorkflowRequestCreateWorkflowRequestBody"
+            }
+          }
+        ],
+        "tags": [
+          "Workflow"
+        ]
+      }
+    },
+    "/v1/workflows/{workflowId}": {
+      "get": {
+        "operationId": "Workflow_GetWorkflow",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetWorkflowReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "workflowId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Workflow"
+        ]
+      },
+      "delete": {
+        "operationId": "Workflow_DeleteWorkflow",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteWorkflowReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "workflowId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Workflow"
+        ]
+      },
+      "patch": {
+        "operationId": "Workflow_UpdateWorkflow",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateWorkflowReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "workflowId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateWorkflowRequestUpdateWorkflowRequestBody"
+            }
+          }
+        ],
+        "tags": [
+          "Workflow"
+        ]
+      }
+    },
+    "/v1/workflows/{workflowId}/instances": {
+      "get": {
+        "operationId": "Workflow_ListWorkflowInstance",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListWorkflowInstanceReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "workflowId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Workflow"
+        ]
+      }
+    },
+    "/v1/workflows/{workflowId}/instances/{instanceId}": {
+      "get": {
+        "operationId": "Workflow_GetWorkflowInstance",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetWorkflowInstanceReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "workflowId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Workflow"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "CreateOrganisationMemberRequestCreateOrganisationMemberBody": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "role": {
+          "$ref": "#/definitions/v1AppRole"
+        }
+      }
+    },
+    "CreateOrganisationRequestCreateOrganisationRequestBody": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "website": {
+          "type": "string"
+        },
+        "iconUrl": {
+          "type": "string"
+        }
+      }
+    },
+    "CreateSchemaRequestCreateSchemaRequestBody": {
+      "type": "object"
+    },
+    "CreateSpaceRequestCreateSpaceRequestBody": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "CreateWorkflowRequestCreateWorkflowRequestBody": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "triggerId": {
+          "type": "string"
+        },
+        "templateId": {
+          "type": "string"
+        },
+        "spaceId": {
+          "type": "string"
+        },
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "SignupRequestSignupBody": {
+      "type": "object",
+      "properties": {
+        "identifier": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        }
+      }
+    },
+    "TaskStepMessageTaskStepMetadataMessage": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "isTrigger": {
+          "type": "boolean"
+        },
+        "taskReference": {
+          "$ref": "#/definitions/v1EntityReferenceMessage"
+        },
+        "connected": {
+          "type": "boolean"
+        },
+        "enableDirection": {
+          "type": "boolean"
+        }
+      }
+    },
+    "TaskStepMessageTaskStepPositionMessage": {
+      "type": "object",
+      "properties": {
+        "x": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "y": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "UpdateOrganisationMemberRequestUpdateOrganisationMemberBody": {
+      "type": "object",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/v1AppRole"
+        }
+      }
+    },
+    "UpdateOrganisationRequestUpdateOrganisationRequestBody": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "website": {
+          "type": "string"
+        },
+        "iconUrl": {
+          "type": "string"
+        }
+      }
+    },
+    "UpdateSchemaRequestUpdateSchemaRequestBody": {
+      "type": "object"
+    },
+    "UpdateSpaceRequestUpdateSpaceRequestBody": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "UpdateWorkflowRequestUpdateWorkflowRequestBody": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "spaceId": {
+          "type": "string"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "public": {
+          "type": "boolean"
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1TaskStepMessage"
+          }
+        },
+        "stepEdges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1StepEdgeMessage"
+          }
+        },
+        "settings": {
+          "$ref": "#/definitions/v1WorkflowSettingsMessage"
+        }
+      }
+    },
+    "commonv1TaskMessage": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "categoryId": {
+          "type": "string"
+        },
+        "schema": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "extends": {
+          "$ref": "#/definitions/v1EntityReferenceMessage"
+        },
+        "version": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object"
+        },
+        "documentation": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "taskType": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "typeUrl": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "protobufNullValue": {
+      "type": "string",
+      "enum": [
+        "NULL_VALUE"
+      ],
+      "default": "NULL_VALUE",
+      "description": "`NullValue` is a singleton enumeration to represent the null value for the\n`Value` type union.\n\n The JSON representation for `NullValue` is JSON `null`.\n\n - NULL_VALUE: Null value."
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1AppRole": {
+      "type": "string",
+      "enum": [
+        "OWNER",
+        "ADMIN",
+        "EDITOR",
+        "VIEWER"
+      ],
+      "default": "OWNER"
+    },
+    "v1CategoryMessage": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "name": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        }
+      }
+    },
+    "v1CreateCategoryReply": {
+      "type": "object"
+    },
+    "v1CreateOrganisationMemberReply": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/v1OrganisationMemberMessage"
+        }
+      }
+    },
+    "v1CreateOrganisationReply": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/v1OrganisationMessage"
+        }
+      }
+    },
+    "v1CreateSchemaReply": {
+      "type": "object"
+    },
+    "v1CreateSpaceReply": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/v1SpaceMessage"
+        }
+      }
+    },
+    "v1CreateTaskReply": {
+      "type": "object"
+    },
+    "v1CreateUserReply": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/v1UserMessage"
+        }
+      }
+    },
+    "v1CreateUserRequest": {
+      "type": "object"
+    },
+    "v1CreateWorkflowReply": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/v1WorkflowMessage"
+        }
+      }
+    },
+    "v1DeleteCategoryReply": {
+      "type": "object"
+    },
+    "v1DeleteOrganisationMemberReply": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/v1OrganisationMemberMessage"
+        }
+      }
+    },
+    "v1DeleteOrganisationReply": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/v1OrganisationMessage"
+        }
+      }
+    },
+    "v1DeleteSchemaReply": {
+      "type": "object"
+    },
+    "v1DeleteSpaceReply": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/v1SpaceMessage"
+        }
+      }
+    },
+    "v1DeleteTaskReply": {
+      "type": "object"
+    },
+    "v1DeleteUserReply": {
+      "type": "object"
+    },
+    "v1DeleteWorkflowReply": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/v1WorkflowMessage"
+        }
+      }
+    },
+    "v1EntityReferenceMessage": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "revision": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "type": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    },
+    "v1GetCategoryReply": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/v1CategoryMessage"
+        }
+      }
+    },
+    "v1GetOrganisationReply": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/v1OrganisationMessage"
+        }
+      }
+    },
+    "v1GetSchemaReply": {
+      "type": "object"
+    },
+    "v1GetSpaceReply": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/v1SpaceMessage"
+        }
+      }
+    },
+    "v1GetTaskReply": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/commonv1TaskMessage"
+        }
+      }
+    },
+    "v1GetUserReply": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/v1UserMessage"
+        }
+      }
+    },
+    "v1GetWorkflowInstanceReply": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/v1WorkflowInstanceMessage"
+        }
+      }
+    },
+    "v1GetWorkflowReply": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/v1WorkflowMessage"
+        }
+      }
+    },
+    "v1InvitationStatus": {
+      "type": "string",
+      "enum": [
+        "PENDING",
+        "APPROVED",
+        "REJECTED"
+      ],
+      "default": "PENDING"
+    },
+    "v1ListCategoryReply": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1CategoryMessage"
+          }
+        }
+      }
+    },
+    "v1ListOrganisationMemberReply": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1OrganisationMemberMessage"
+          }
+        }
+      }
+    },
+    "v1ListOrganisationReply": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1OrganisationMessage"
+          }
+        }
+      }
+    },
+    "v1ListSchemaReply": {
+      "type": "object"
+    },
+    "v1ListSpaceReply": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1SpaceMessage"
+          }
+        }
+      }
+    },
+    "v1ListTaskReply": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commonv1TaskMessage"
+          }
+        }
+      }
+    },
+    "v1ListUserReply": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1UserMessage"
+          }
+        }
+      }
+    },
+    "v1ListWorkflowInstanceReply": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1WorkflowInstanceMessage"
+          }
+        }
+      }
+    },
+    "v1ListWorkflowReply": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1WorkflowMessage"
+          }
+        }
+      }
+    },
+    "v1LoginReply": {
+      "type": "object",
+      "properties": {
+        "accessToken": {
+          "type": "string"
+        },
+        "refreshToken": {
+          "type": "string"
+        }
+      }
+    },
+    "v1LoginRequestLoginBody": {
+      "type": "object",
+      "properties": {
+        "identifier": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "v1LogoutReply": {
+      "type": "object"
+    },
+    "v1OrganisationMemberMessage": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "user": {
+          "$ref": "#/definitions/v1UserMessage"
+        },
+        "email": {
+          "type": "string"
+        },
+        "role": {
+          "$ref": "#/definitions/v1AppRole"
+        },
+        "organisationId": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/v1InvitationStatus"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "v1OrganisationMessage": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "website": {
+          "type": "string"
+        },
+        "iconUrl": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "organisationType": {
+          "$ref": "#/definitions/v1OrganisationType"
+        },
+        "active": {
+          "type": "boolean"
+        }
+      }
+    },
+    "v1OrganisationType": {
+      "type": "string",
+      "enum": [
+        "PERSONAL",
+        "TEAM"
+      ],
+      "default": "PERSONAL"
+    },
+    "v1SessionReply": {
+      "type": "object",
+      "properties": {
+        "accessToken": {
+          "type": "string"
+        },
+        "refreshToken": {
+          "type": "string"
+        }
+      }
+    },
+    "v1SignupReply": {
+      "type": "object"
+    },
+    "v1SpaceMessage": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "organisationId": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "v1StepEdgeMessage": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "style": {
+          "type": "object"
+        }
+      }
+    },
+    "v1SwitchOrganisationReply": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/v1OrganisationMessage"
+        }
+      }
+    },
+    "v1TaskStepMessage": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/TaskStepMessageTaskStepMetadataMessage"
+        },
+        "properties": {
+          "type": "object"
+        },
+        "task": {
+          "$ref": "#/definitions/v1TaskStepMessageTaskMessage"
+        },
+        "position": {
+          "$ref": "#/definitions/TaskStepMessageTaskStepPositionMessage"
+        },
+        "label": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "v1TaskStepMessageTaskMessage": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "schema": {
+          "type": "object"
+        },
+        "name": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object"
+        },
+        "revision": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        }
+      }
+    },
+    "v1UpdateCategoryReply": {
+      "type": "object"
+    },
+    "v1UpdateOrganisationMemberReply": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/v1OrganisationMemberMessage"
+        }
+      }
+    },
+    "v1UpdateOrganisationReply": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/v1OrganisationMessage"
+        }
+      }
+    },
+    "v1UpdateSchemaReply": {
+      "type": "object"
+    },
+    "v1UpdateSpaceReply": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/v1SpaceMessage"
+        }
+      }
+    },
+    "v1UpdateTaskReply": {
+      "type": "object"
+    },
+    "v1UpdateUserReply": {
+      "type": "object"
+    },
+    "v1UpdateUserRequest": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        }
+      }
+    },
+    "v1UpdateWorkflowReply": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/v1WorkflowMessage"
+        }
+      }
+    },
+    "v1UserMessage": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "organisationMemberships": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1OrganisationMemberMessage"
+          }
+        },
+        "name": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "currentOrganisationId": {
+          "type": "string"
+        },
+        "currentOrganisation": {
+          "$ref": "#/definitions/v1OrganisationMessage"
+        }
+      }
+    },
+    "v1WhoAmIReply": {
+      "type": "object",
+      "properties": {
+        "me": {
+          "$ref": "#/definitions/v1UserMessage"
+        }
+      }
+    },
+    "v1WorkflowInstanceMessage": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "organisationId": {
+          "type": "string"
+        },
+        "workflowId": {
+          "type": "string"
+        },
+        "createdBy": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "state": {
+          "type": "object"
+        },
+        "metadata": {
+          "type": "object"
+        },
+        "input": {
+          "type": "object"
+        },
+        "output": {
+          "type": "object"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "v1WorkflowMessage": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "organisationId": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "description": {
+          "type": "string"
+        },
+        "spaceId": {
+          "type": "string"
+        },
+        "schema": {
+          "type": "string"
+        },
+        "revision": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "public": {
+          "type": "boolean"
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1TaskStepMessage"
+          }
+        },
+        "stepEdges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1StepEdgeMessage"
+          }
+        },
+        "settings": {
+          "$ref": "#/definitions/v1WorkflowSettingsMessage"
+        }
+      }
+    },
+    "v1WorkflowSettingsMessage": {
+      "type": "object",
+      "properties": {
+        "config": {
+          "type": "object"
+        },
+        "inputSchema": {
+          "type": "object"
+        },
+        "outputSchema": {
+          "type": "object"
+        }
+      }
+    }
+  }
+}

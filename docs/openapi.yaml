@@ -1,0 +1,1518 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/cmd/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: Wakflo Populus
+    description: Wakflo populus api
+    version: 0.0.1
+paths:
+    /v1/auth/login:
+        post:
+            tags:
+                - Auth
+            operationId: Auth_Login
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.auth.v1.LoginRequest_LoginBody'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.auth.v1.LoginReply'
+    /v1/auth/logout:
+        post:
+            tags:
+                - Auth
+            operationId: Auth_Logout
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.auth.v1.LogoutReply'
+    /v1/auth/session:
+        get:
+            tags:
+                - Auth
+            operationId: Auth_Session
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.auth.v1.SessionReply'
+    /v1/auth/signup:
+        post:
+            tags:
+                - Auth
+            operationId: Auth_Signup
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.auth.v1.SignupRequest_SignupBody'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.auth.v1.SignupReply'
+    /v1/auth/whoami:
+        get:
+            tags:
+                - Auth
+            operationId: Auth_WhoAmI
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.auth.v1.WhoAmIReply'
+    /v1/categories:
+        get:
+            tags:
+                - Category
+            operationId: Category_ListCategory
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.categories.v1.ListCategoryReply'
+        post:
+            tags:
+                - Category
+            operationId: Category_CreateCategory
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.categories.v1.CreateCategoryReply'
+    /v1/categories/{categoryId}:
+        get:
+            tags:
+                - Category
+            operationId: Category_GetCategory
+            parameters:
+                - name: categoryId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.categories.v1.GetCategoryReply'
+        delete:
+            tags:
+                - Category
+            operationId: Category_DeleteCategory
+            parameters:
+                - name: categoryId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.categories.v1.DeleteCategoryReply'
+        patch:
+            tags:
+                - Category
+            operationId: Category_UpdateCategory
+            parameters:
+                - name: categoryId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.categories.v1.UpdateCategoryReply'
+    /v1/organisations:
+        get:
+            tags:
+                - Organisation
+            operationId: Organisation_ListOrganisation
+            parameters:
+                - name: limit
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: skip
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.organisations.v1.ListOrganisationReply'
+        post:
+            tags:
+                - Organisation
+            operationId: Organisation_CreateOrganisation
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.organisations.v1.CreateOrganisationRequest_CreateOrganisationRequestBody'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.organisations.v1.CreateOrganisationReply'
+    /v1/organisations/{organisationId}:
+        get:
+            tags:
+                - Organisation
+            operationId: Organisation_GetOrganisation
+            parameters:
+                - name: organisationId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.organisations.v1.GetOrganisationReply'
+        delete:
+            tags:
+                - Organisation
+            operationId: Organisation_DeleteOrganisation
+            parameters:
+                - name: organisationId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.organisations.v1.DeleteOrganisationReply'
+        patch:
+            tags:
+                - Organisation
+            operationId: Organisation_UpdateOrganisation
+            parameters:
+                - name: organisationId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.organisations.v1.UpdateOrganisationRequest_UpdateOrganisationRequestBody'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.organisations.v1.UpdateOrganisationReply'
+    /v1/organisations/{organisationId}/members:
+        get:
+            tags:
+                - Organisation
+            operationId: Organisation_ListOrganisationMember
+            parameters:
+                - name: organisationId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                - name: limit
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: skip
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.organisations.v1.ListOrganisationMemberReply'
+        post:
+            tags:
+                - Organisation
+            operationId: Organisation_CreateOrganisationMember
+            parameters:
+                - name: organisationId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                - name: memberId
+                  in: query
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.organisations.v1.CreateOrganisationMemberRequest_CreateOrganisationMemberBody'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.organisations.v1.CreateOrganisationMemberReply'
+    /v1/organisations/{organisationId}/members/{memberId}:
+        delete:
+            tags:
+                - Organisation
+            operationId: Organisation_DeleteOrganisationMember
+            parameters:
+                - name: organisationId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                - name: memberId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.organisations.v1.DeleteOrganisationMemberReply'
+        patch:
+            tags:
+                - Organisation
+            operationId: Organisation_UpdateOrganisationMember
+            parameters:
+                - name: organisationId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                - name: memberId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.organisations.v1.UpdateOrganisationMemberRequest_UpdateOrganisationMemberBody'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.organisations.v1.UpdateOrganisationMemberReply'
+    /v1/organisations/{organisationId}/switch:
+        post:
+            tags:
+                - Organisation
+            operationId: Organisation_SwitchOrganisation
+            parameters:
+                - name: organisationId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.organisations.v1.SwitchOrganisationReply'
+    /v1/schemas:
+        get:
+            tags:
+                - Schema
+            operationId: Schema_ListSchema
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.schemas.v1.ListSchemaReply'
+        post:
+            tags:
+                - Schema
+            operationId: Schema_CreateSchema
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.schemas.v1.CreateSchemaRequest_CreateSchemaRequestBody'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.schemas.v1.CreateSchemaReply'
+    /v1/schemas/{schemaId}:
+        get:
+            tags:
+                - Schema
+            operationId: Schema_GetSchema
+            parameters:
+                - name: schemaId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.schemas.v1.GetSchemaReply'
+        delete:
+            tags:
+                - Schema
+            operationId: Schema_DeleteSchema
+            parameters:
+                - name: schemaId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.schemas.v1.DeleteSchemaReply'
+        patch:
+            tags:
+                - Schema
+            operationId: Schema_UpdateSchema
+            parameters:
+                - name: schemaId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.schemas.v1.UpdateSchemaRequest_UpdateSchemaRequestBody'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.schemas.v1.UpdateSchemaReply'
+    /v1/spaces:
+        get:
+            tags:
+                - Space
+            operationId: Space_ListSpace
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.spaces.v1.ListSpaceReply'
+        post:
+            tags:
+                - Space
+            operationId: Space_CreateSpace
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.spaces.v1.CreateSpaceRequest_CreateSpaceRequestBody'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.spaces.v1.CreateSpaceReply'
+    /v1/spaces/{spaceId}:
+        get:
+            tags:
+                - Space
+            operationId: Space_GetSpace
+            parameters:
+                - name: spaceId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.spaces.v1.GetSpaceReply'
+        delete:
+            tags:
+                - Space
+            operationId: Space_DeleteSpace
+            parameters:
+                - name: spaceId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.spaces.v1.DeleteSpaceReply'
+        patch:
+            tags:
+                - Space
+            operationId: Space_UpdateSpace
+            parameters:
+                - name: spaceId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.spaces.v1.UpdateSpaceRequest_UpdateSpaceRequestBody'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.spaces.v1.UpdateSpaceReply'
+    /v1/tasks:
+        get:
+            tags:
+                - Task
+            operationId: Task_ListTask
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.tasks.v1.ListTaskReply'
+        post:
+            tags:
+                - Task
+            operationId: Task_CreateTask
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.tasks.v1.CreateTaskReply'
+    /v1/tasks/{taskId}:
+        get:
+            tags:
+                - Task
+            operationId: Task_GetTask
+            parameters:
+                - name: taskId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.tasks.v1.GetTaskReply'
+        delete:
+            tags:
+                - Task
+            operationId: Task_DeleteTask
+            parameters:
+                - name: taskId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.tasks.v1.DeleteTaskReply'
+        patch:
+            tags:
+                - Task
+            operationId: Task_UpdateTask
+            parameters:
+                - name: taskId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.tasks.v1.UpdateTaskReply'
+    /v1/users:
+        get:
+            tags:
+                - User
+            operationId: User_ListUser
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.users.v1.ListUserReply'
+        post:
+            tags:
+                - User
+            operationId: User_CreateUser
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.users.v1.CreateUserRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.users.v1.CreateUserReply'
+        patch:
+            tags:
+                - User
+            operationId: User_UpdateUser
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.users.v1.UpdateUserRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.users.v1.UpdateUserReply'
+    /v1/users/{userId}:
+        get:
+            tags:
+                - User
+            operationId: User_GetUser
+            parameters:
+                - name: userId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.users.v1.GetUserReply'
+        delete:
+            tags:
+                - User
+            operationId: User_DeleteUser
+            parameters:
+                - name: userId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.users.v1.DeleteUserReply'
+    /v1/workflows:
+        get:
+            tags:
+                - Workflow
+            operationId: Workflow_ListWorkflow
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.workflows.v1.ListWorkflowReply'
+        post:
+            tags:
+                - Workflow
+            operationId: Workflow_CreateWorkflow
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.workflows.v1.CreateWorkflowRequest_CreateWorkflowRequestBody'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.workflows.v1.CreateWorkflowReply'
+    /v1/workflows/{workflowId}:
+        get:
+            tags:
+                - Workflow
+            operationId: Workflow_GetWorkflow
+            parameters:
+                - name: workflowId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.workflows.v1.GetWorkflowReply'
+        delete:
+            tags:
+                - Workflow
+            operationId: Workflow_DeleteWorkflow
+            parameters:
+                - name: workflowId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.workflows.v1.DeleteWorkflowReply'
+        patch:
+            tags:
+                - Workflow
+            operationId: Workflow_UpdateWorkflow
+            parameters:
+                - name: workflowId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.workflows.v1.UpdateWorkflowRequest_UpdateWorkflowRequestBody'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.workflows.v1.UpdateWorkflowReply'
+    /v1/workflows/{workflowId}/instances:
+        get:
+            tags:
+                - Workflow
+            operationId: Workflow_ListWorkflowInstance
+            parameters:
+                - name: workflowId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.workflows.v1.ListWorkflowInstanceReply'
+    /v1/workflows/{workflowId}/instances/{instanceId}:
+        get:
+            tags:
+                - Workflow
+            operationId: Workflow_GetWorkflowInstance
+            parameters:
+                - name: workflowId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                - name: instanceId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.workflows.v1.GetWorkflowInstanceReply'
+components:
+    schemas:
+        api.auth.v1.LoginReply:
+            type: object
+            properties:
+                accessToken:
+                    type: string
+                refreshToken:
+                    type: string
+        api.auth.v1.LoginRequest_LoginBody:
+            type: object
+            properties:
+                identifier:
+                    type: string
+                password:
+                    type: string
+        api.auth.v1.LogoutReply:
+            type: object
+            properties: {}
+        api.auth.v1.SessionReply:
+            type: object
+            properties:
+                accessToken:
+                    type: string
+                refreshToken:
+                    type: string
+        api.auth.v1.SignupReply:
+            type: object
+            properties: {}
+        api.auth.v1.SignupRequest_SignupBody:
+            type: object
+            properties:
+                identifier:
+                    type: string
+                password:
+                    type: string
+                firstName:
+                    type: string
+                lastName:
+                    type: string
+        api.auth.v1.WhoAmIReply:
+            type: object
+            properties:
+                me:
+                    $ref: '#/components/schemas/api.shared.common.v1.UserMessage'
+        api.categories.v1.CreateCategoryReply:
+            type: object
+            properties: {}
+        api.categories.v1.DeleteCategoryReply:
+            type: object
+            properties: {}
+        api.categories.v1.GetCategoryReply:
+            type: object
+            properties:
+                data:
+                    $ref: '#/components/schemas/api.shared.common.v1.CategoryMessage'
+        api.categories.v1.ListCategoryReply:
+            type: object
+            properties:
+                data:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.shared.common.v1.CategoryMessage'
+        api.categories.v1.UpdateCategoryReply:
+            type: object
+            properties: {}
+        api.organisations.v1.CreateOrganisationMemberReply:
+            type: object
+            properties:
+                data:
+                    $ref: '#/components/schemas/api.shared.common.v1.OrganisationMemberMessage'
+        api.organisations.v1.CreateOrganisationMemberRequest_CreateOrganisationMemberBody:
+            type: object
+            properties:
+                email:
+                    type: string
+                role:
+                    enum:
+                        - OWNER
+                        - ADMIN
+                        - EDITOR
+                        - VIEWER
+                    type: string
+                    format: enum
+        api.organisations.v1.CreateOrganisationReply:
+            type: object
+            properties:
+                data:
+                    $ref: '#/components/schemas/api.shared.common.v1.OrganisationMessage'
+        api.organisations.v1.CreateOrganisationRequest_CreateOrganisationRequestBody:
+            type: object
+            properties:
+                name:
+                    type: string
+                website:
+                    type: string
+                iconUrl:
+                    type: string
+        api.organisations.v1.DeleteOrganisationMemberReply:
+            type: object
+            properties:
+                data:
+                    $ref: '#/components/schemas/api.shared.common.v1.OrganisationMemberMessage'
+        api.organisations.v1.DeleteOrganisationReply:
+            type: object
+            properties:
+                data:
+                    $ref: '#/components/schemas/api.shared.common.v1.OrganisationMessage'
+        api.organisations.v1.GetOrganisationReply:
+            type: object
+            properties:
+                data:
+                    $ref: '#/components/schemas/api.shared.common.v1.OrganisationMessage'
+        api.organisations.v1.ListOrganisationMemberReply:
+            type: object
+            properties:
+                data:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.shared.common.v1.OrganisationMemberMessage'
+        api.organisations.v1.ListOrganisationReply:
+            type: object
+            properties:
+                data:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.shared.common.v1.OrganisationMessage'
+        api.organisations.v1.SwitchOrganisationReply:
+            type: object
+            properties:
+                data:
+                    $ref: '#/components/schemas/api.shared.common.v1.OrganisationMessage'
+        api.organisations.v1.UpdateOrganisationMemberReply:
+            type: object
+            properties:
+                data:
+                    $ref: '#/components/schemas/api.shared.common.v1.OrganisationMemberMessage'
+        api.organisations.v1.UpdateOrganisationMemberRequest_UpdateOrganisationMemberBody:
+            type: object
+            properties:
+                role:
+                    enum:
+                        - OWNER
+                        - ADMIN
+                        - EDITOR
+                        - VIEWER
+                    type: string
+                    format: enum
+        api.organisations.v1.UpdateOrganisationReply:
+            type: object
+            properties:
+                data:
+                    $ref: '#/components/schemas/api.shared.common.v1.OrganisationMessage'
+        api.organisations.v1.UpdateOrganisationRequest_UpdateOrganisationRequestBody:
+            type: object
+            properties:
+                name:
+                    type: string
+                website:
+                    type: string
+                iconUrl:
+                    type: string
+        api.schemas.v1.CreateSchemaReply:
+            type: object
+            properties: {}
+        api.schemas.v1.CreateSchemaRequest_CreateSchemaRequestBody:
+            type: object
+            properties: {}
+        api.schemas.v1.DeleteSchemaReply:
+            type: object
+            properties: {}
+        api.schemas.v1.GetSchemaReply:
+            type: object
+            properties: {}
+        api.schemas.v1.ListSchemaReply:
+            type: object
+            properties: {}
+        api.schemas.v1.UpdateSchemaReply:
+            type: object
+            properties: {}
+        api.schemas.v1.UpdateSchemaRequest_UpdateSchemaRequestBody:
+            type: object
+            properties: {}
+        api.shared.common.v1.CategoryMessage:
+            type: object
+            properties:
+                id:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
+                updatedAt:
+                    type: string
+                    format: date-time
+                name:
+                    type: string
+                slug:
+                    type: string
+        api.shared.common.v1.EntityReferenceMessage:
+            type: object
+            properties:
+                key:
+                    type: string
+                value:
+                    type: string
+                revision:
+                    type: integer
+                    format: uint32
+                type:
+                    type: string
+                version:
+                    type: string
+        api.shared.common.v1.OrganisationMemberMessage:
+            type: object
+            properties:
+                id:
+                    type: string
+                user:
+                    $ref: '#/components/schemas/api.shared.common.v1.UserMessage'
+                email:
+                    type: string
+                role:
+                    enum:
+                        - OWNER
+                        - ADMIN
+                        - EDITOR
+                        - VIEWER
+                    type: string
+                    format: enum
+                organisationId:
+                    type: string
+                status:
+                    enum:
+                        - PENDING
+                        - APPROVED
+                        - REJECTED
+                    type: string
+                    format: enum
+                createdAt:
+                    type: string
+                    format: date-time
+                updatedAt:
+                    type: string
+                    format: date-time
+        api.shared.common.v1.OrganisationMessage:
+            type: object
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+                slug:
+                    type: string
+                website:
+                    type: string
+                iconUrl:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
+                updatedAt:
+                    type: string
+                    format: date-time
+                organisationType:
+                    enum:
+                        - PERSONAL
+                        - TEAM
+                    type: string
+                    format: enum
+                active:
+                    type: boolean
+        api.shared.common.v1.SpaceMessage:
+            type: object
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+                slug:
+                    type: string
+                organisationId:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
+                updatedAt:
+                    type: string
+                    format: date-time
+        api.shared.common.v1.StepEdgeMessage:
+            type: object
+            properties:
+                id:
+                    type: string
+                source:
+                    type: string
+                type:
+                    type: string
+                target:
+                    type: string
+                style:
+                    type: object
+        api.shared.common.v1.TaskMessage:
+            type: object
+            properties:
+                id:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
+                updatedAt:
+                    type: string
+                    format: date-time
+                categoryId:
+                    type: string
+                schema:
+                    type: string
+                displayName:
+                    type: string
+                name:
+                    type: string
+                namespace:
+                    type: string
+                extends:
+                    $ref: '#/components/schemas/api.shared.common.v1.EntityReferenceMessage'
+                version:
+                    type: string
+                properties:
+                    type: object
+                documentation:
+                    type: string
+                description:
+                    type: string
+                taskType:
+                    type: string
+                icon:
+                    type: string
+        api.shared.common.v1.TaskStepMessage:
+            type: object
+            properties:
+                id:
+                    type: string
+                metadata:
+                    $ref: '#/components/schemas/api.shared.common.v1.TaskStepMessage_TaskStepMetadataMessage'
+                properties:
+                    type: object
+                task:
+                    $ref: '#/components/schemas/api.shared.common.v1.TaskStepMessage_TaskMessage'
+                position:
+                    $ref: '#/components/schemas/api.shared.common.v1.TaskStepMessage_TaskStepPositionMessage'
+                label:
+                    type: string
+                icon:
+                    type: string
+                type:
+                    type: string
+        api.shared.common.v1.TaskStepMessage_TaskMessage:
+            type: object
+            properties:
+                id:
+                    type: string
+                schema:
+                    type: object
+                name:
+                    type: string
+                displayName:
+                    type: string
+                namespace:
+                    type: string
+                properties:
+                    type: object
+                revision:
+                    type: string
+                icon:
+                    type: string
+        api.shared.common.v1.TaskStepMessage_TaskStepMetadataMessage:
+            type: object
+            properties:
+                name:
+                    type: string
+                isTrigger:
+                    type: boolean
+                taskReference:
+                    $ref: '#/components/schemas/api.shared.common.v1.EntityReferenceMessage'
+                connected:
+                    type: boolean
+                enableDirection:
+                    type: boolean
+        api.shared.common.v1.TaskStepMessage_TaskStepPositionMessage:
+            type: object
+            properties:
+                x:
+                    type: integer
+                    format: int32
+                y:
+                    type: integer
+                    format: int32
+        api.shared.common.v1.UserMessage:
+            type: object
+            properties:
+                id:
+                    type: string
+                email:
+                    type: string
+                firstName:
+                    type: string
+                lastName:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
+                updatedAt:
+                    type: string
+                    format: date-time
+                organisationMemberships:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.shared.common.v1.OrganisationMemberMessage'
+                name:
+                    type: string
+                phone:
+                    type: string
+                currentOrganisationId:
+                    type: string
+                currentOrganisation:
+                    $ref: '#/components/schemas/api.shared.common.v1.OrganisationMessage'
+        api.shared.common.v1.WorkflowInstanceMessage:
+            type: object
+            properties:
+                id:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
+                updatedAt:
+                    type: string
+                    format: date-time
+                organisationId:
+                    type: string
+                workflowId:
+                    type: string
+                createdBy:
+                    type: string
+                status:
+                    type: string
+                state:
+                    type: object
+                metadata:
+                    type: object
+                input:
+                    type: object
+                output:
+                    type: object
+                errors:
+                    type: array
+                    items:
+                        type: object
+        api.shared.common.v1.WorkflowMessage:
+            type: object
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+                displayName:
+                    type: string
+                organisationId:
+                    type: string
+                createdAt:
+                    type: string
+                    format: date-time
+                updatedAt:
+                    type: string
+                    format: date-time
+                description:
+                    type: string
+                spaceId:
+                    type: string
+                schema:
+                    type: string
+                revision:
+                    type: integer
+                    format: uint32
+                enabled:
+                    type: boolean
+                public:
+                    type: boolean
+                steps:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.shared.common.v1.TaskStepMessage'
+                stepEdges:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.shared.common.v1.StepEdgeMessage'
+                settings:
+                    $ref: '#/components/schemas/api.shared.common.v1.WorkflowSettingsMessage'
+        api.shared.common.v1.WorkflowSettingsMessage:
+            type: object
+            properties:
+                config:
+                    type: object
+                inputSchema:
+                    type: object
+                outputSchema:
+                    type: object
+        api.spaces.v1.CreateSpaceReply:
+            type: object
+            properties:
+                data:
+                    $ref: '#/components/schemas/api.shared.common.v1.SpaceMessage'
+        api.spaces.v1.CreateSpaceRequest_CreateSpaceRequestBody:
+            type: object
+            properties:
+                name:
+                    type: string
+        api.spaces.v1.DeleteSpaceReply:
+            type: object
+            properties:
+                data:
+                    $ref: '#/components/schemas/api.shared.common.v1.SpaceMessage'
+        api.spaces.v1.GetSpaceReply:
+            type: object
+            properties:
+                data:
+                    $ref: '#/components/schemas/api.shared.common.v1.SpaceMessage'
+        api.spaces.v1.ListSpaceReply:
+            type: object
+            properties:
+                data:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.shared.common.v1.SpaceMessage'
+        api.spaces.v1.UpdateSpaceReply:
+            type: object
+            properties:
+                data:
+                    $ref: '#/components/schemas/api.shared.common.v1.SpaceMessage'
+        api.spaces.v1.UpdateSpaceRequest_UpdateSpaceRequestBody:
+            type: object
+            properties:
+                name:
+                    type: string
+        api.tasks.v1.CreateTaskReply:
+            type: object
+            properties: {}
+        api.tasks.v1.DeleteTaskReply:
+            type: object
+            properties: {}
+        api.tasks.v1.GetTaskReply:
+            type: object
+            properties:
+                data:
+                    $ref: '#/components/schemas/api.shared.common.v1.TaskMessage'
+        api.tasks.v1.ListTaskReply:
+            type: object
+            properties:
+                data:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.shared.common.v1.TaskMessage'
+        api.tasks.v1.UpdateTaskReply:
+            type: object
+            properties: {}
+        api.users.v1.CreateUserReply:
+            type: object
+            properties:
+                data:
+                    $ref: '#/components/schemas/api.shared.common.v1.UserMessage'
+        api.users.v1.CreateUserRequest:
+            type: object
+            properties: {}
+        api.users.v1.DeleteUserReply:
+            type: object
+            properties: {}
+        api.users.v1.GetUserReply:
+            type: object
+            properties:
+                data:
+                    $ref: '#/components/schemas/api.shared.common.v1.UserMessage'
+        api.users.v1.ListUserReply:
+            type: object
+            properties:
+                data:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.shared.common.v1.UserMessage'
+        api.users.v1.UpdateUserReply:
+            type: object
+            properties: {}
+        api.users.v1.UpdateUserRequest:
+            type: object
+            properties:
+                userId:
+                    type: string
+        api.workflows.v1.CreateWorkflowReply:
+            type: object
+            properties:
+                data:
+                    $ref: '#/components/schemas/api.shared.common.v1.WorkflowMessage'
+        api.workflows.v1.CreateWorkflowRequest_CreateWorkflowRequestBody:
+            type: object
+            properties:
+                name:
+                    type: string
+                description:
+                    type: string
+                triggerId:
+                    type: string
+                templateId:
+                    type: string
+                spaceId:
+                    type: string
+                schema:
+                    type: string
+        api.workflows.v1.DeleteWorkflowReply:
+            type: object
+            properties:
+                data:
+                    $ref: '#/components/schemas/api.shared.common.v1.WorkflowMessage'
+        api.workflows.v1.GetWorkflowInstanceReply:
+            type: object
+            properties:
+                data:
+                    $ref: '#/components/schemas/api.shared.common.v1.WorkflowInstanceMessage'
+        api.workflows.v1.GetWorkflowReply:
+            type: object
+            properties:
+                data:
+                    $ref: '#/components/schemas/api.shared.common.v1.WorkflowMessage'
+        api.workflows.v1.ListWorkflowInstanceReply:
+            type: object
+            properties:
+                data:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.shared.common.v1.WorkflowInstanceMessage'
+        api.workflows.v1.ListWorkflowReply:
+            type: object
+            properties:
+                data:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.shared.common.v1.WorkflowMessage'
+        api.workflows.v1.UpdateWorkflowReply:
+            type: object
+            properties:
+                data:
+                    $ref: '#/components/schemas/api.shared.common.v1.WorkflowMessage'
+        api.workflows.v1.UpdateWorkflowRequest_UpdateWorkflowRequestBody:
+            type: object
+            properties:
+                name:
+                    type: string
+                displayName:
+                    type: string
+                description:
+                    type: string
+                spaceId:
+                    type: string
+                enabled:
+                    type: boolean
+                public:
+                    type: boolean
+                steps:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.shared.common.v1.TaskStepMessage'
+                stepEdges:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.shared.common.v1.StepEdgeMessage'
+                settings:
+                    $ref: '#/components/schemas/api.shared.common.v1.WorkflowSettingsMessage'
+tags:
+    - name: Auth
+    - name: Category
+    - name: Organisation
+    - name: Schema
+    - name: Space
+    - name: Task
+    - name: User
+    - name: Workflow
