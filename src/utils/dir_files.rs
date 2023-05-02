@@ -1,10 +1,10 @@
-use std::{fs};
-use std::io::Write;
 use crate::utils::types::WakfloConfig;
+use std::fs;
+use std::io::Write;
 
 pub(crate) fn setup_wakflo_dir() -> anyhow::Result<()> {
     let home_dir = dirs::home_dir().expect("can't read home path");
-    let mut wakflo_dir = home_dir.clone();
+    let mut wakflo_dir = home_dir;
     wakflo_dir.extend(&[".wakflo"]);
 
     if !wakflo_dir.try_exists()? && !wakflo_dir.is_dir() {
@@ -25,7 +25,7 @@ pub(crate) fn setup_wakflo_dir() -> anyhow::Result<()> {
 
 pub(crate) fn get_wakflo_config() -> anyhow::Result<WakfloConfig> {
     let home_dir = dirs::home_dir().expect("can't read home path");
-    let mut wakflo_config_dir = home_dir.clone();
+    let mut wakflo_config_dir = home_dir;
     wakflo_config_dir.extend(&[".wakflo/config.json"]);
 
     if !wakflo_config_dir.try_exists()? && !wakflo_config_dir.is_dir() {
@@ -39,7 +39,7 @@ pub(crate) fn get_wakflo_config() -> anyhow::Result<WakfloConfig> {
 
 pub(crate) fn update_wakflo_config(config: WakfloConfig) -> anyhow::Result<()> {
     let home_dir = dirs::home_dir().expect("can't read home path");
-    let mut wakflo_config_dir = home_dir.clone();
+    let mut wakflo_config_dir = home_dir;
     wakflo_config_dir.extend(&[".wakflo/config.json"]);
     let value = serde_json::to_value(config)?;
     let json = serde_json::to_string_pretty(&value)?;

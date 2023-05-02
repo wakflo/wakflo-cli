@@ -1,9 +1,9 @@
 pub(crate) mod auth;
 pub(crate) mod category;
 
-use std::time::Duration;
 use crate::api::auth::WakfloAuthApi;
 use crate::api::category::WakfloCategoryApi;
+use std::time::Duration;
 
 pub struct WakfloApi {
     #[allow(unused)]

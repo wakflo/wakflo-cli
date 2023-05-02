@@ -1,6 +1,6 @@
-use serde::{Serialize, Deserialize};
 use crate::utils::dir_files::get_wakflo_config;
 use crate::utils::types::{LoginResponse, WakfloUser};
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub(crate) struct LoginRequest {
@@ -20,15 +20,19 @@ pub struct WakfloAuthApi {
 
 impl WakfloAuthApi {
     pub fn new(base_url: String, client: ureq::Agent) -> WakfloAuthApi {
-        WakfloAuthApi {
-            base_url,
-            client,
-        }
+        WakfloAuthApi { base_url, client }
     }
 
-    pub(crate) fn login(&self, identifier: String, password: String) -> anyhow::Result<LoginResponse> {
+    pub(crate) fn login(
+        &self,
+        identifier: String,
+        password: String,
+    ) -> anyhow::Result<LoginResponse> {
         let url = format!("{}{}", self.base_url, "/auth/login");
-        let body = LoginRequest { password, identifier };
+        let body = LoginRequest {
+            password,
+            identifier,
+        };
 
         let response = self.client.post(url.as_str()).send_json(body)?;
         let json = response.into_json::<LoginResponse>()?;
@@ -41,7 +45,14 @@ impl WakfloAuthApi {
 
         let config = get_wakflo_config()?;
         if config.auth.is_some() {
-            req = req.set("Authorization", format!("Bearer {}", config.auth.unwrap().access_token).as_str());
+            req = req.set(
+                "Authorization",
+                format!(
+                    "Bearer {}",
+                    config.auth.expect("missing auth api").access_token
+                )
+                .as_str(),
+            );
         }
 
         let response = req.call()?;

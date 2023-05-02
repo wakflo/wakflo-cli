@@ -1,9 +1,9 @@
 [package]
-name = "wakflo-rs"
+name = "wakflo"
 version = "0.0.1"
 edition = "2021"
 description = "A commandline utility for wakflo.ai services"
-authors = ["Wakflo LLC <team@wakflo.dev>"]
+authors = ["Wakflo LLC <team@wakflo.ai>"]
 license = "Private"
 readme = "README.md"
 homepage = "https://wakflo.ai"
@@ -12,14 +12,8 @@ keywords = ["rust", "build", "tool"]
 categories = ["build", "rust-build-tools"]
 
 [[bin]]
-name = "cargo-wakflo"
-path = "src/main.rs"
-
-[[bin]]
 name = "wakflo"
-path = "src/../src/main.rs"
-test = false
-bench = false
+path = "src/main.rs"
 
 [build-dependencies]
 rustc_version = "0.4.0"

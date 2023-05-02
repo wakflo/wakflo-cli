@@ -1,11 +1,10 @@
 mod auth;
 mod plugin;
 
-use clap::{CommandFactory, Parser, Subcommand};
-use auth::AuthCommand;
-use plugin::PluginCommand;
 use crate::utils::dir_files::setup_wakflo_dir;
-
+use auth::AuthCommand;
+use clap::{CommandFactory, Parser, Subcommand};
+use plugin::PluginCommand;
 
 // #[derive(Debug, Args)]
 // struct GlobalOpts {
@@ -28,7 +27,6 @@ use crate::utils::dir_files::setup_wakflo_dir;
 pub struct WakfloCli {
     // #[clap(flatten)]
     // global_opts: GlobalOpts,
-
     #[command(subcommand)]
     command: Commands,
 }
@@ -38,13 +36,13 @@ enum Commands {
     /// Authentication commands
     Auth {
         #[clap(subcommand)]
-        auth: AuthCommand
+        auth: AuthCommand,
     },
 
     /// Plugins commands
-    Plugin{
+    Plugin {
         #[clap(subcommand)]
-        plugin: PluginCommand
+        plugin: PluginCommand,
     },
     /// Generate shell completions
     Completions {
@@ -65,25 +63,18 @@ impl WakfloCli {
                 shell.generate(&mut WakfloCli::command(), &mut std::io::stdout());
                 Ok(())
             }
-            Commands::Auth { auth } => {
-                match auth {
-                    AuthCommand::Login { password, identity } =>
-                        AuthCommand::login(identity, password),
-                    AuthCommand::Whoami =>
-                        AuthCommand::whoami(),
-                    AuthCommand::Logout => Ok(())
-                }
-            }
-            Commands::Plugin { plugin } => {
-                match plugin {
-                    PluginCommand::New { name } => PluginCommand::new_plugin(name),
-                    PluginCommand::Publish => Ok(()),
-                    PluginCommand::Test => Ok(()),
-                    PluginCommand::Run => PluginCommand::run_plugin(),
-                }
-            }
+            Commands::Auth { auth } => match auth {
+                AuthCommand::Login { password, identity } => AuthCommand::login(identity, password),
+                AuthCommand::Whoami => AuthCommand::whoami(),
+                AuthCommand::Logout => Ok(()),
+            },
+            Commands::Plugin { plugin } => match plugin {
+                PluginCommand::New { name } => PluginCommand::new_plugin(name),
+                PluginCommand::Publish => Ok(()),
+                PluginCommand::Test => Ok(()),
+                PluginCommand::Run => PluginCommand::run_plugin(),
+            },
         };
-
 
         if let Err(e) = rsp {
             // loading.fail(format!("{}", e))

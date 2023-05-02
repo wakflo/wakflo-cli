@@ -1,10 +1,10 @@
-use std::{fs, path};
-use std::io::Write;
 use convert_case::{Case, Casing};
-use serde::{Serialize, Deserialize};
-use strum_macros::{EnumString, EnumIter};
+use serde::{Deserialize, Serialize};
 use std::convert::AsRef;
+use std::io::Write;
+use std::{fs, path};
 use strum_macros::AsRefStr;
+use strum_macros::{EnumIter, EnumString};
 
 #[derive(Debug, Serialize, Deserialize, EnumString, EnumIter, AsRefStr)]
 pub(crate) enum Lang {
@@ -13,9 +13,8 @@ pub(crate) enum Lang {
     Javascript,
     Golang,
     Python,
-    Php
+    Php,
 }
-
 
 #[derive(Debug, Serialize, Deserialize)]
 pub(crate) struct PluginConfig {
@@ -26,9 +25,10 @@ pub(crate) struct PluginConfig {
 }
 
 pub(crate) fn resolve_variables(code: &str, config: &PluginConfig) -> anyhow::Result<String> {
-    let name = config.name.clone().to_case(Case::Kebab).to_lowercase();
+    let name = config.name.to_case(Case::Kebab).to_lowercase();
     let template = liquid::ParserBuilder::with_stdlib()
-        .build().unwrap()
+        .build()
+        .expect("failed to parse template")
         .parse(code)?;
 
     let lang = config.lang.as_ref();
@@ -58,8 +58,6 @@ pub(crate) const README: &str = r#"## {{ name }}
 Getting Started
 "#;
 
-
-
 pub(crate) const PROPERTIES: &str = r#"{
   "input": {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -80,21 +78,24 @@ pub(crate) const PROPERTIES: &str = r#"{
 }
 "#;
 
-
 /// generate wakflo plugin config
 pub(crate) fn generate_shared_plugin_files(config: &PluginConfig) -> anyhow::Result<()> {
     let dir_name = config.name.clone().to_case(Case::Kebab).to_lowercase();
 
-    let mut resolved_str = resolve_variables(WAKFLO_TOML, &config)?;
-    let mut file = fs::File::create(path::Path::new(format!("{}/wakflo.toml", dir_name).as_str()))?;
+    let mut resolved_str = resolve_variables(WAKFLO_TOML, config)?;
+    let mut file = fs::File::create(path::Path::new(
+        format!("{}/wakflo.toml", dir_name).as_str(),
+    ))?;
     file.write_all(resolved_str.as_bytes())?;
 
-    resolved_str = resolve_variables(README, &config)?;
+    resolved_str = resolve_variables(README, config)?;
     file = fs::File::create(path::Path::new(format!("{}/README.md", dir_name).as_str()))?;
     file.write_all(resolved_str.as_bytes())?;
 
-    resolved_str = resolve_variables(PROPERTIES, &config)?;
-    file = fs::File::create(path::Path::new(format!("{}/properties.json", dir_name).as_str()))?;
+    resolved_str = resolve_variables(PROPERTIES, config)?;
+    file = fs::File::create(path::Path::new(
+        format!("{}/properties.json", dir_name).as_str(),
+    ))?;
     file.write_all(resolved_str.as_bytes())?;
 
     Ok(())

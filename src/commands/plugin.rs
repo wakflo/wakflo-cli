@@ -1,10 +1,10 @@
-use clap::{Subcommand};
+use crate::api::make_api;
+use crate::templates::rust::create_rust_plugin_project;
+use crate::utils::plugin::{string_to_lang, Lang, PluginConfig};
+use clap::Subcommand;
 use console::Style;
 use dialoguer::{theme::ColorfulTheme, Confirm, Input, Select};
 use loading::Loading;
-use crate::api::make_api;
-use crate::templates::rust::create_rust_plugin_project;
-use crate::utils::plugin::{Lang, PluginConfig, string_to_lang};
 
 #[derive(Subcommand)]
 pub enum PluginCommand {
@@ -30,13 +30,7 @@ impl PluginCommand {
             ..ColorfulTheme::default()
         };
 
-        let lang_list = &[
-            "Rust",
-            "Typescript",
-            "Javascript",
-            "Golang",
-            "PHP",
-        ];
+        let lang_list = &["Rust", "Typescript", "Javascript", "Golang", "PHP"];
 
         println!("Welcome to Wakflo.AI new plugin setup wizard");
 
@@ -56,32 +50,34 @@ impl PluginCommand {
 
         #[allow(unused_assignments)]
         let mut plugin_name = String::new();
-        if let None = name {
+        if name.is_none() {
             plugin_name = Input::with_theme(&theme)
                 .with_prompt("Name (plugin name)")
-                .interact_text().expect("missing");
+                .interact_text()
+                .expect("missing");
         } else {
-            plugin_name = name.expect("plugin name missing");
+            plugin_name = name.unwrap_or_default();
         }
 
         let description: String = Input::with_theme(&theme)
             .with_prompt("Description")
             .allow_empty(true)
-            .interact().expect("missing");
+            .interact()
+            .expect("missing description");
 
         let category_idx = Select::with_theme(&ColorfulTheme::default())
             .with_prompt("Select a category")
             .default(0)
             .items(&category_ids.clone())
             .interact()
-            .unwrap();
+            .expect("missing category");
 
         let lang_idx = Select::with_theme(&ColorfulTheme::default())
             .with_prompt("Select a language")
             .default(0)
             .items(&lang_list[..])
             .interact()
-            .unwrap();
+            .expect("missing lang");
 
         let lang = lang_list[lang_idx];
         let cat = category_ids.get(category_idx).expect("missing category");

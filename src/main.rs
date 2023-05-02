@@ -1,10 +1,10 @@
-mod commands;
 mod api;
+mod commands;
 mod templates;
 mod utils;
 
-use human_panic::setup_panic;
 use commands::WakfloCli;
+use human_panic::setup_panic;
 
 fn main() {
     setup_panic!();

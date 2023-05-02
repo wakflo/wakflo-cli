@@ -1,9 +1,9 @@
-use std::{fs, path};
-use std::io::Write;
+use crate::utils::plugin::{generate_shared_plugin_files, resolve_variables, PluginConfig};
 use anyhow::bail;
 use convert_case::{Case, Casing};
 use loading::Loading;
-use crate::utils::plugin::{PluginConfig, resolve_variables, generate_shared_plugin_files};
+use std::io::Write;
+use std::{fs, path};
 
 pub const MAIN_RS: &str = r#"use serde_json::Value;
 
@@ -30,8 +30,11 @@ sersde_json= "3.3"
 //     Ok(())
 // }
 
-pub(crate) fn create_rust_plugin_project(config: PluginConfig, loading: &Loading) -> anyhow::Result<()> {
-    let dir_name = config.name.clone().to_case(Case::Kebab).to_lowercase();
+pub(crate) fn create_rust_plugin_project(
+    config: PluginConfig,
+    loading: &Loading,
+) -> anyhow::Result<()> {
+    let dir_name = config.name.to_case(Case::Kebab).to_lowercase();
     let plugin_path = path::Path::new(dir_name.as_str());
     if plugin_path.exists() && plugin_path.is_dir() {
         bail!("dir with plugin name {} already exist", dir_name)
@@ -54,7 +57,9 @@ pub(crate) fn create_rust_plugin_project(config: PluginConfig, loading: &Loading
     fs::create_dir(path::Path::new(format!("{}/tests", dir_name).as_str()))?;
 
     resolved_str = resolve_variables(MAIN_RS, &config)?;
-    file = fs::File::create(path::Path::new(format!("{}/lib/main.rs", dir_name).as_str()))?;
+    file = fs::File::create(path::Path::new(
+        format!("{}/lib/main.rs", dir_name).as_str(),
+    ))?;
     file.write_all(resolved_str.as_bytes())?;
 
     loading.success("created plugin successfully   ✅");
