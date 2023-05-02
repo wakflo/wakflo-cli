@@ -119,15 +119,15 @@ jobs:
           cache-on-failure: "true"
           key: ${{ matrix.style }}v1 # increment this to bust the cache if needed
 
-      - name: Run release-plz
+      - name: Run Release
         uses: google-github-actions/release-please-action@v3
         with:
           release-type: rust
           package-name: wakflo
           default-branch: main
           signoff: "xraph <rex@wakflo.com>"
+          token: ${{ secrets.GITHUB_TOKEN }} # <-- PAT secret name
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # <-- PAT secret name
           CARGO_REGISTRY_TOKEN: ${{ secrets.CRATES_IO_TOKEN }}
 
 #      - name: Run release-plz
