@@ -1,11 +1,11 @@
 <p align="center">
-  <img src="https://img.shields.io/badge/version-1.0.0--beta-green"> <img src="https://img.shields.io/github/license/wakflo/fleet?color=pink"> <img src="https://img.shields.io/tokei/lines/github/wakflo/fleet?color=white&label=lines%20of%20code"> <img src="https://img.shields.io/github/languages/top/wakflo/fleet?color=%230xfffff">
+  <img src="https://img.shields.io/badge/version-0.0.1-green"> <img src="https://img.shields.io/github/license/wakflo/wakflo-cli?color=pink"> <img src="https://img.shields.io/tokei/lines/github/wakflo/fleet?color=white&label=lines%20of%20code"> <img src="https://img.shields.io/github/languages/top/wakflo/fleet?color=%230xfffff">
 </p>
 
 <br>
 
 
-[Wakflo](https://wakflo.ai) is a blazing fast build tool for Rust. Compiling with Wakflo is up-to 5x faster than with `cargo`.
+[Wakflo](https://wakflo.ai) is a blazing fast build tool for Rust.
 <br>
 
 # :zap: Installation
