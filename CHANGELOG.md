@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.3](https://github.com/wakflo/wakflo-cli/compare/v0.0.2...v0.0.3) - 2023-05-02
+
+### Added
+- improved example
+
 ## [0.0.2](https://github.com/wakflo/wakflo-cli/compare/v0.0.1...v0.0.2) - 2023-05-02
 
 ### Added
