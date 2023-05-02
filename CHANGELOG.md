@@ -6,6 +6,48 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.5](https://github.com/wakflo/wakflo-cli/compare/v0.0.4...v0.0.5) - 2023-05-02
+
+### Added
+- improved rust template
+- improved rust template
+- improved rust template
+- improved rust template
+- improved rust template
+- improved rust template
+- improved rust template
+- improved rust template
+- improved rust template
+- improved rust template
+- improved rust template
+- improved rust template
+- improved rust template
+- improved rust template
+- improved example
+- improved example
+- first commit
+- first commit
+- first commit
+- first commit
+- first commit
+- first commit
+- first commit
+- first commit
+- first commit
+- first commit
+- first commit
+- first commit
+- first commit
+- first commit
+
+### Other
+- release
+- update ci
+- update ci
+- update ci
+- update ci
+- update ci
+
 ## [0.0.3](https://github.com/wakflo/wakflo-cli/compare/v0.0.2...v0.0.3) - 2023-05-02
 
 ### Added
