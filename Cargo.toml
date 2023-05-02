@@ -1,6 +1,6 @@
 [package]
 name = "wakflo"
-version = "0.0.2"
+version = "0.0.3"
 edition = "2021"
 description = "A commandline utility for wakflo.ai services"
 authors = ["Wakflo LLC <team@wakflo.ai>"]
