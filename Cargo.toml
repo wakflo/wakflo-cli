@@ -1,10 +1,19 @@
 [package]
+<<<<<<< HEAD
 name = "wakflo"
 version = "0.0.1"
 edition = "2021"
 description = "A commandline utility for wakflo.ai services"
 authors = ["Wakflo LLC <team@wakflo.ai>"]
 license-file = "LICENSE.txt"
+=======
+name = "wakflo-rs"
+version = "0.0.1"
+edition = "2021"
+description = "A commandline utility for wakflo.ai services"
+authors = ["Wakflo LLC <team@wakflo.dev>"]
+license = "Private"
+>>>>>>> 85173fa (feat: first commit)
 readme = "README.md"
 homepage = "https://wakflo.ai"
 repository = "https://github.com/wakflo/wakflo-cli"
@@ -12,14 +21,27 @@ keywords = ["rust", "build", "tool"]
 categories = ["build", "rust-build-tools"]
 
 [[bin]]
+<<<<<<< HEAD
 name = "wakflo"
 path = "src/main.rs"
 
+=======
+name = "cargo-wakflo"
+path = "src/main.rs"
+
+[[bin]]
+name = "wakflo"
+path = "src/../src/main.rs"
+test = false
+bench = false
+
+>>>>>>> 85173fa (feat: first commit)
 [build-dependencies]
 rustc_version = "0.4.0"
 
 [dependencies]
 anyhow = "1.0.57"
+<<<<<<< HEAD
 dirs = "5.0.0"
 sysinfo = "0.28.4"
 rustc_version = "0.4.0"
@@ -28,6 +50,26 @@ convert_case = "0.6.0"
 fs_extra = "1.3"
 loading = "0.3"
 human-panic = "1.0.3"
+=======
+ansi_term = "0.12"
+dirs = "5.0.0"
+wsl = "0.1.0"
+sysinfo = "0.28.4"
+rustc_version = "0.4.0"
+colored = "2.0.0"
+sys-info = "0.9.1"
+which = "4.2.5"
+serde_json = "1.0.81"
+convert_case = "0.6.0"
+fs_extra = "1.3"
+comfy-table = "6.0.0"
+tokio = { version = "1", features = ["full"] }
+byte-unit = "4.0.14"
+cargo-util = "0.2.3"
+loading = "0.3"
+human-panic = "1.0.3"
+ptree = "0.4.0"
+>>>>>>> 85173fa (feat: first commit)
 dialoguer = "0.10.4"
 console = "0.15"
 liquid = "0.26.1"

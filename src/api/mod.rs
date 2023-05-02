@@ -1,9 +1,15 @@
 pub(crate) mod auth;
 pub(crate) mod category;
 
+<<<<<<< HEAD
 use crate::api::auth::WakfloAuthApi;
 use crate::api::category::WakfloCategoryApi;
 use std::time::Duration;
+=======
+use std::time::Duration;
+use crate::api::auth::WakfloAuthApi;
+use crate::api::category::WakfloCategoryApi;
+>>>>>>> 85173fa (feat: first commit)
 
 pub struct WakfloApi {
     #[allow(unused)]
@@ -33,4 +39,8 @@ impl WakfloApi {
 
 pub fn make_api() -> WakfloApi {
     WakfloApi::new()
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 85173fa (feat: first commit)
