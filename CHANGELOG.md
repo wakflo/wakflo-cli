@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.0](https://github.com/wakflo/wakflo-cli/compare/v0.0.7...v0.1.0) (2023-05-02)
+
+
+### Features
+
+* improved rust template ([7a754fc](https://github.com/wakflo/wakflo-cli/commit/7a754fc1921a867ba3927db135dd4a585a01e9f8))
+* improved rust template ([185fa33](https://github.com/wakflo/wakflo-cli/commit/185fa333d0a00679f0daa87a8181f18d81ac223f))
+* improved rust template ([c1c869b](https://github.com/wakflo/wakflo-cli/commit/c1c869bc48cb5992c87c2b428047259f2280649b))
+* improved rust template ([c379e80](https://github.com/wakflo/wakflo-cli/commit/c379e80a189fecf2fcf94449ddd808f44d4544e5))
+
 ## [Unreleased]
 
 ## [0.0.7](https://github.com/wakflo/wakflo-cli/compare/v0.0.6...v0.0.7) - 2023-05-02
