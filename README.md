@@ -24,7 +24,7 @@ iwr -useb windows.wakflo.ai | iex
 ## Building from source
 Prerequisites: **Rust**
 ```powershell
-cargo install --git https://github.com/wakflo/wakflo-rs wakflo-rs
+cargo install --git https://github.com/wakflo/wakflo-cli wakflo
 ```
 
 
