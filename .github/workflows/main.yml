@@ -124,6 +124,8 @@ jobs:
         with:
           release-type: rust
           package-name: wakflo
+          default-branch: main
+          signoff: "xraph <rex@wakflo.com>"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # <-- PAT secret name
           CARGO_REGISTRY_TOKEN: ${{ secrets.CRATES_IO_TOKEN }}
