@@ -74,7 +74,7 @@ jobs:
         with:
           bin: wakflo
           target: ${{ matrix.target }}
-          archive: wakflo-${{ matrix.name }}
+          archive: ${{ matrix.name }}
           tar: all
           zip: windows
           # (required) GitHub token for uploading assets to GitHub Releases.
