@@ -195,13 +195,13 @@ jobs:
           cache-on-failure: "true"
           key: ${{ matrix.style }}v1 # increment this to bust the cache if needed
 
-      - uses: taiki-e/setup-cross-toolchain-action@v1
-        with:
-          target: ${{ matrix.target }}
-        if: startsWith(matrix.os, 'ubuntu') && !contains(matrix.target, '-musl')
-
-      - uses: taiki-e/install-action@cross
-        if: contains(matrix.target, '-musl')
+#      - uses: taiki-e/setup-cross-toolchain-action@v1
+#        with:
+#          target: ${{ matrix.target }}
+#        if: startsWith(matrix.os, 'ubuntu') && !contains(matrix.target, '-musl')
+#
+#      - uses: taiki-e/install-action@cross
+#        if: contains(matrix.target, '-musl')
 
       - run: echo "RUSTFLAGS=${RUSTFLAGS} -C target-feature=+crt-static" >> "${GITHUB_ENV}"
         if: endsWith(matrix.target, 'windows-msvc')
