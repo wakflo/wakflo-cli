@@ -6,10 +6,8 @@ permissions:
   contents: write
 
 on:
-  create:
-    ref_type: tag
   release:
-    types: [created, published, released]
+    types: [created]
   push:
     tags:
       - '*'
