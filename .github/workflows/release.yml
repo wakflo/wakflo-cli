@@ -72,10 +72,7 @@ jobs:
 
       - uses: taiki-e/upload-rust-binary-action@v1
         with:
-          # (required) Comma-separated list of binary names (non-extension portion of filename) to build and upload.
-          # Note that glob pattern is not supported yet.
           bin: wakflo
-          # (optional) Target triple, default is host triple.
           target: ${{ matrix.target }}
           archive: wakflo-${{ matrix.name }}
           tar: all
