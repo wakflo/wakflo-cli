@@ -1,5 +1,10 @@
 name: "publish-release"
 
+permissions:
+  id-token: write # Enable OIDC
+  pull-requests: write
+  contents: write
+
 on:
   pull_request:
   push:
@@ -79,11 +84,6 @@ jobs:
       - lint-test
     if: github.ref == 'refs/heads/main'
 
-    permissions:
-      id-token: write # Enable OIDC
-      pull-requests: write
-      contents: write
-
     strategy:
       fail-fast: false
       matrix:
@@ -120,15 +120,24 @@ jobs:
           key: ${{ matrix.style }}v1 # increment this to bust the cache if needed
 
       - name: Run release-plz
-        uses: MarcoIeni/release-plz-action@v0.5
+        uses: google-github-actions/release-please-action@v3
+        with:
+          release-type: rust
+          package-name: wakflo
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # <-- PAT secret name
           CARGO_REGISTRY_TOKEN: ${{ secrets.CRATES_IO_TOKEN }}
 
-        with:
-          tag_name: ${{ github.run_number }}
-          release_name: Wakflo AI ${{ github.run_number }}
-          body: |
-            ${{ env.RELEASE_DESCRIPTION }}
-          draft: false
-          prerelease: false
+#      - name: Run release-plz
+#        uses: MarcoIeni/release-plz-action@v0.5
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # <-- PAT secret name
+#          CARGO_REGISTRY_TOKEN: ${{ secrets.CRATES_IO_TOKEN }}
+#
+#        with:
+#          tag_name: ${{ github.run_number }}
+#          release_name: Wakflo AI ${{ github.run_number }}
+#          body: |
+#            ${{ env.RELEASE_DESCRIPTION }}
+#          draft: false
+#          prerelease: false
