@@ -30,15 +30,20 @@ jobs:
         include:
           - target: aarch64-unknown-linux-gnu
             os: ubuntu-latest
-          - target: aarch64-apple-darwin
-            os: macos-latest
+            name: wakflo-linux-arm64
           - target: x86_64-unknown-linux-gnu
             os: ubuntu-latest
+            name: wakflo-linux-arm64
           - target: x86_64-apple-darwin
             os: macos-latest
+            name: wakflo-darwin-x86_64
+          - target: aarch64-apple-darwin
+            os: macos-latest
+            name: wakflo-darwin-arm64
           # Universal macOS binary is supported as universal-apple-darwin.
           - target: universal-apple-darwin
             os: macos-latest
+            name: wakflo-darwin-universal
 #          - target: aarch64-pc-windows-msvc
 #            os: windows-latest
 #          - target: aarch64-pc-windows-msvc
@@ -72,6 +77,7 @@ jobs:
           bin: wakflo
           # (optional) Target triple, default is host triple.
           target: ${{ matrix.target }}
+          archive: wakflo-${{ matrix.name }}
           tar: all
           zip: windows
           # (required) GitHub token for uploading assets to GitHub Releases.
