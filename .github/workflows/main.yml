@@ -2,10 +2,8 @@ name: "publish-release"
 
 on:
   pull_request:
-    types: [opened, reopened]
   push:
     branches:
-      - '*'
 
 env:
   CARGO_TERM_COLOR: always
@@ -73,3 +71,63 @@ jobs:
         with:
           command: test
           args: run --all ${{ matrix.flags }}
+
+  crate-publish:
+    name: "Publish Crate"
+    if: contains(github.ref, 'release') || github.ref == 'refs/heads/main'
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [ ubuntu-latest ] # [ windows-latest, macos-latest, ubuntu-latest ]
+        style: [ default ] # [ all, default ]
+        rust:
+          - stable
+        include:
+          - style: default
+            flags: ''
+
+    runs-on: ${{ matrix.platform }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Fetch tags
+        run: git fetch --tags
+
+      - name: Wait for tests to complete
+        uses: lewagon/wait-on-check-action@v1.3.1
+        with:
+          ref: ${{ github.ref }}
+          check-name: 'Tests'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 10
+
+      - uses: chainguard-dev/actions/setup-gitsign@main
+
+      ### Prepare cargo & toolchains
+      - name: Setup Rust toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: ${{ matrix.rust }}
+          override: true
+          components: rustfmt, clippy
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          cache-on-failure: "true"
+          key: ${{ matrix.style }}v1 # increment this to bust the cache if needed
+
+      - name: Run release-plz
+        uses: MarcoIeni/release-plz-action@v0.5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # <-- PAT secret name
+          CARGO_REGISTRY_TOKEN: ${{ secrets.CRATES_IO_TOKEN }}
+
+        with:
+          tag_name: ${{ github.run_number }}
+          release_name: Wakflo Labs ${{ github.run_number }}
+          body: |
+            ${{ env.RELEASE_DESCRIPTION }}
+          draft: true
+          prerelease: true
