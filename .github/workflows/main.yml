@@ -6,8 +6,14 @@ on:
     branches:
       - main
 
+
 env:
   CARGO_TERM_COLOR: always
+#on:
+#  push:
+#    branches:
+#      - "main"
+#      - "release"
 
 jobs:
   lint-test:
@@ -74,11 +80,15 @@ jobs:
           args: run --all ${{ matrix.flags }}
 
   crate-publish:
-    name: "Publish Crate"
-    if: github.ref == 'refs/heads/main'
-
+    name: "Publish release"
     needs:
       - lint-test
+    if: github.ref == 'refs/heads/main'
+
+    permissions:
+      id-token: write # Enable OIDC
+      pull-requests: write
+      contents: write
 
     strategy:
       fail-fast: false
