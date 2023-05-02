@@ -169,36 +169,14 @@ jobs:
             os: ubuntu-22.04
           - target: universal-apple-darwin
             os: macos-12
-
-      steps:
-        - name: Checkout repository
-          uses: actions/checkout@v3
-        - name: Install Rust toolchain
-          uses: dtolnay/rust-toolchain@stable
-        - uses: taiki-e/setup-cross-toolchain-action@v1
-          with:
-            target: ${{ matrix.target }}
-          if: startsWith(matrix.os, 'ubuntu') && !contains(matrix.target, '-musl')
-        - uses: taiki-e/install-action@cross
-          if: contains(matrix.target, '-musl')
-        - run: echo "RUSTFLAGS=${RUSTFLAGS} -C target-feature=+crt-static" >> "${GITHUB_ENV}"
-          if: endsWith(matrix.target, 'windows-msvc')
-        - uses: taiki-e/upload-rust-binary-action@v1
-          with:
-            bin: wakflo
-            target: ${{ matrix.target }}
-            tar: all
-            zip: windows
-            token: ${{ secrets.GITHUB_TOKEN }}
+    timeout-minutes: 60
 
     runs-on: ${{ matrix.platform }}
 
     steps:
       - uses: actions/checkout@v3
-
       - name: Fetch tags
         run: git fetch --tags
-
       - uses: chainguard-dev/actions/setup-gitsign@main
 
       ### Prepare cargo & toolchains
@@ -215,16 +193,21 @@ jobs:
           cache-on-failure: "true"
           key: ${{ matrix.style }}v1 # increment this to bust the cache if needed
 
-      - name: Run release-plz
-        uses: MarcoIeni/release-plz-action@v0.5
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # <-- PAT secret name
-          CARGO_REGISTRY_TOKEN: ${{ secrets.CRATES_IO_TOKEN }}
-
+      - uses: taiki-e/setup-cross-toolchain-action@v1
         with:
-          tag_name: ${{ github.run_number }}
-          release_name: Wakflo Labs ${{ github.run_number }}
-          body: |
-            ${{ env.RELEASE_DESCRIPTION }}
-          draft: true
-          prerelease: false
+          target: ${{ matrix.target }}
+        if: startsWith(matrix.os, 'ubuntu') && !contains(matrix.target, '-musl')
+
+      - uses: taiki-e/install-action@cross
+        if: contains(matrix.target, '-musl')
+
+      - run: echo "RUSTFLAGS=${RUSTFLAGS} -C target-feature=+crt-static" >> "${GITHUB_ENV}"
+        if: endsWith(matrix.target, 'windows-msvc')
+
+      - uses: taiki-e/upload-rust-binary-action@v1
+        with:
+          bin: wakflo
+          target: ${{ matrix.target }}
+          tar: all
+          zip: windows
+          token: ${{ secrets.GITHUB_TOKEN }}
