@@ -208,7 +208,7 @@ jobs:
 
       - uses: taiki-e/upload-rust-binary-action@v1
         with:
-          bin: wakflo
+          bin: wakflo-${{ matrix.target }}
           target: ${{ matrix.target }}
           tar: all
           zip: windows
