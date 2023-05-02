@@ -182,26 +182,26 @@ jobs:
       - uses: chainguard-dev/actions/setup-gitsign@main
 
       ### Prepare cargo & toolchains
-      - name: Setup Rust toolchain
-        uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: ${{ matrix.rust }}
-          override: true
-          components: rustfmt, clippy
+#      - name: Setup Rust toolchain
+#        uses: actions-rs/toolchain@v1
+#        with:
+#          profile: minimal
+#          toolchain: ${{ matrix.rust }}
+#          override: true
+#          components: rustfmt, clippy
 
       - uses: Swatinem/rust-cache@v2
         with:
           cache-on-failure: "true"
           key: ${{ matrix.style }}v1 # increment this to bust the cache if needed
 
-#      - uses: taiki-e/setup-cross-toolchain-action@v1
-#        with:
-#          target: ${{ matrix.target }}
-#        if: startsWith(matrix.os, 'ubuntu') && !contains(matrix.target, '-musl')
-#
-#      - uses: taiki-e/install-action@cross
-#        if: contains(matrix.target, '-musl')
+      - uses: taiki-e/setup-cross-toolchain-action@v1
+        with:
+          target: ${{ matrix.target }}
+        if: startsWith(matrix.os, 'ubuntu') && !contains(matrix.target, '-musl')
+
+      - uses: taiki-e/install-action@cross
+        if: contains(matrix.target, '-musl')
 
       - run: echo "RUSTFLAGS=${RUSTFLAGS} -C target-feature=+crt-static" >> "${GITHUB_ENV}"
         if: endsWith(matrix.target, 'windows-msvc')
