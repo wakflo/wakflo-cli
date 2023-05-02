@@ -24,4 +24,8 @@ const PACKAGE_JSON: &str = r#"
   "devDependencies": {
   }
 }
+<<<<<<< HEAD
 "#;
+=======
+"#;
+>>>>>>> 85173fa (feat: first commit)
