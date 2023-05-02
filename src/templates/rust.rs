@@ -6,11 +6,11 @@ use std::io::Write;
 use std::{fs, path};
 
 pub const MAIN_RS: &str = r#"use serde_json::Value;
+use wakflo_sdk::*;
 
+#[workflow_task]
 pub fn execute() -> anyhow::Result<Value> {
-    setup_panic!();
 
-    WakfloCli::init();
 }
 "#;
 
@@ -23,7 +23,8 @@ edition = "2021"
 
 [dependencies]
 anyhow = "0.2"
-sersde_json= "3.3"
+sersde_json = "3.3"
+wakflo_sdk = "0"
 "#;
 
 // pub(crate) fn check_wakflo_project(p: PathBuf) -> anyhow::Result<()> {
