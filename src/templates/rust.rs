@@ -11,7 +11,7 @@ use wakflo_sdk::prelude::*;
 #[workflow_task]
 pub fn execute() -> JsonOutput<String> {
    let msg = "Hello Wakflo";
-   Ok(serde_json::Value::Null)
+   Ok(tag)
 }
 "#;
 
