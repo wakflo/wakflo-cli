@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0](https://github.com/wakflo/wakflo-cli/compare/v0.1.0...v0.2.0) (2023-05-02)
+
+
+### Features
+
+* updated rust temp ([c092f0c](https://github.com/wakflo/wakflo-cli/commit/c092f0c9432b3444e5033b3d7f0e2f514de842db))
+
 ## [0.1.0](https://github.com/wakflo/wakflo-cli/compare/v0.0.7...v0.1.0) (2023-05-02)
 
 
