@@ -9,7 +9,7 @@ readme = "README.md"
 homepage = "https://wakflo.ai"
 repository = "https://github.com/wakflo/wakflo-cli"
 keywords = ["rust", "build", "tool"]
-categories = ["build", "rust-build-tools"]
+categories = ["development-tools"]
 
 [[bin]]
 name = "wakflo"
