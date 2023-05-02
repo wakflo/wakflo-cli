@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.5](https://github.com/wakflo/wakflo-cli/compare/v0.3.4...v0.3.5) (2023-05-02)
+
+
+### Bug Fixes
+
+* updated ci ([1460dc6](https://github.com/wakflo/wakflo-cli/commit/1460dc66d1611c6641fa918180f59fac5e9089ab))
+
 ## [0.3.4](https://github.com/wakflo/wakflo-cli/compare/v0.3.3...v0.3.4) (2023-05-02)
 
 
