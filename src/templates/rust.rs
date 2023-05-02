@@ -6,10 +6,10 @@ use std::io::Write;
 use std::{fs, path};
 
 pub const MAIN_RS: &str = r#"use serde_json::Value;
-use wakflo_sdk::*;
+use wakflo_sdk::prelude::*;
 
 #[workflow_task]
-pub fn execute() -> anyhow::Result<Value> {
+pub fn execute() -> JsonOutput<String> {
    let msg = "Hello Wakflo";
    Ok(serde_json::Value::Null)
 }
