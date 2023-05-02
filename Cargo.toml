@@ -59,3 +59,8 @@ opt-level = 0
 debug = 2
 incremental = true
 
+[profile.release]
+strip = true
+codegen-units = 1
+lto = true
+

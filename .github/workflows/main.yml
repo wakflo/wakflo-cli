@@ -127,7 +127,7 @@ jobs:
 
         with:
           tag_name: ${{ github.run_number }}
-          release_name: Wakflo Labs ${{ github.run_number }}
+          release_name: Wakflo AI ${{ github.run_number }}
           body: |
             ${{ env.RELEASE_DESCRIPTION }}
           draft: false
