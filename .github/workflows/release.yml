@@ -6,9 +6,9 @@ permissions:
   contents: write
 
 on:
-  release:
   push:
     tags:
+      - v[0-9]+.*
 
 jobs:
   upload-assets:
