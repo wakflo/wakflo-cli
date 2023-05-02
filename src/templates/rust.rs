@@ -10,7 +10,7 @@ use wakflo_sdk::*;
 
 #[workflow_task]
 pub fn execute() -> anyhow::Result<Value> {
-
+   Ok(serde_json::Value::Null)
 }
 "#;
 
