@@ -7,7 +7,7 @@ permissions:
 
 on:
   release:
-    types: [ published, created ]
+    types: [created]
   push:
     tags:
       - '*'
