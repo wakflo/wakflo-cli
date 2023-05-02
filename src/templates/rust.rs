@@ -12,6 +12,7 @@ use wakflo_sdk::prelude::*;
 pub fn execute() -> JsonOutput<String> {
    let msg = "Hello Wakflo";
 
+   // send result
    Ok(tag)
 }
 "#;
