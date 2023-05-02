@@ -10,6 +10,7 @@ use wakflo_sdk::*;
 
 #[workflow_task]
 pub fn execute() -> anyhow::Result<Value> {
+   let msg = "Hello Wakflo";
    Ok(serde_json::Value::Null)
 }
 "#;
