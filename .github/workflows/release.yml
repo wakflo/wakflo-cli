@@ -5,11 +5,10 @@ permissions:
   pull-requests: write
   contents: write
 
-
 on:
+  release:
+    types: [published]
   push:
-    branches:
-      - "release/**"
     tags:
       - v[0-9]+.*
 
