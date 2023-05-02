@@ -8,9 +8,9 @@ permissions:
 on:
   release:
     types: [created]
-  push:
-    tags:
-      - '*'
+#  push:
+#    tags:
+#      - '*'
 
 jobs:
 #  create-release:
