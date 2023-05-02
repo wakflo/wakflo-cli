@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 use convert_case::{Case, Casing};
 use serde::{Deserialize, Serialize};
 use std::convert::AsRef;
@@ -5,6 +6,15 @@ use std::io::Write;
 use std::{fs, path};
 use strum_macros::AsRefStr;
 use strum_macros::{EnumIter, EnumString};
+=======
+use std::{fs, path};
+use std::io::Write;
+use convert_case::{Case, Casing};
+use serde::{Serialize, Deserialize};
+use strum_macros::{EnumString, EnumIter};
+use std::convert::AsRef;
+use strum_macros::AsRefStr;
+>>>>>>> 85173fa (feat: first commit)
 
 #[derive(Debug, Serialize, Deserialize, EnumString, EnumIter, AsRefStr)]
 pub(crate) enum Lang {
@@ -13,9 +23,16 @@ pub(crate) enum Lang {
     Javascript,
     Golang,
     Python,
+<<<<<<< HEAD
     Php,
 }
 
+=======
+    Php
+}
+
+
+>>>>>>> 85173fa (feat: first commit)
 #[derive(Debug, Serialize, Deserialize)]
 pub(crate) struct PluginConfig {
     pub name: String,
@@ -25,10 +42,16 @@ pub(crate) struct PluginConfig {
 }
 
 pub(crate) fn resolve_variables(code: &str, config: &PluginConfig) -> anyhow::Result<String> {
+<<<<<<< HEAD
     let name = config.name.to_case(Case::Kebab).to_lowercase();
     let template = liquid::ParserBuilder::with_stdlib()
         .build()
         .expect("failed to parse template")
+=======
+    let name = config.name.clone().to_case(Case::Kebab).to_lowercase();
+    let template = liquid::ParserBuilder::with_stdlib()
+        .build().unwrap()
+>>>>>>> 85173fa (feat: first commit)
         .parse(code)?;
 
     let lang = config.lang.as_ref();
@@ -58,6 +81,11 @@ pub(crate) const README: &str = r#"## {{ name }}
 Getting Started
 "#;
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 85173fa (feat: first commit)
 pub(crate) const PROPERTIES: &str = r#"{
   "input": {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -78,10 +106,15 @@ pub(crate) const PROPERTIES: &str = r#"{
 }
 "#;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 85173fa (feat: first commit)
 /// generate wakflo plugin config
 pub(crate) fn generate_shared_plugin_files(config: &PluginConfig) -> anyhow::Result<()> {
     let dir_name = config.name.clone().to_case(Case::Kebab).to_lowercase();
 
+<<<<<<< HEAD
     let mut resolved_str = resolve_variables(WAKFLO_TOML, config)?;
     let mut file = fs::File::create(path::Path::new(
         format!("{}/wakflo.toml", dir_name).as_str(),
@@ -96,6 +129,18 @@ pub(crate) fn generate_shared_plugin_files(config: &PluginConfig) -> anyhow::Res
     file = fs::File::create(path::Path::new(
         format!("{}/properties.json", dir_name).as_str(),
     ))?;
+=======
+    let mut resolved_str = resolve_variables(WAKFLO_TOML, &config)?;
+    let mut file = fs::File::create(path::Path::new(format!("{}/wakflo.toml", dir_name).as_str()))?;
+    file.write_all(resolved_str.as_bytes())?;
+
+    resolved_str = resolve_variables(README, &config)?;
+    file = fs::File::create(path::Path::new(format!("{}/README.md", dir_name).as_str()))?;
+    file.write_all(resolved_str.as_bytes())?;
+
+    resolved_str = resolve_variables(PROPERTIES, &config)?;
+    file = fs::File::create(path::Path::new(format!("{}/properties.json", dir_name).as_str()))?;
+>>>>>>> 85173fa (feat: first commit)
     file.write_all(resolved_str.as_bytes())?;
 
     Ok(())

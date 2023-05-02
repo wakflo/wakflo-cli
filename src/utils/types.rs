@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 use serde::{Deserialize, Serialize};
+=======
+use serde::{Serialize, Deserialize};
+>>>>>>> 85173fa (feat: first commit)
 
 #[derive(Debug, Serialize, Deserialize)]
 pub(crate) struct LoginResponse {
@@ -31,4 +35,8 @@ pub(crate) struct PluginCategory {
 #[derive(Debug, Serialize, Deserialize)]
 pub(crate) struct WakfloResponse<T> {
     pub data: T,
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 85173fa (feat: first commit)

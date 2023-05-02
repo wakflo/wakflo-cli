@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 use crate::api::make_api;
 use crate::templates::rust::create_rust_plugin_project;
 use crate::utils::plugin::{string_to_lang, Lang, PluginConfig};
@@ -5,6 +6,15 @@ use clap::Subcommand;
 use console::Style;
 use dialoguer::{theme::ColorfulTheme, Confirm, Input, Select};
 use loading::Loading;
+=======
+use clap::{Subcommand};
+use console::Style;
+use dialoguer::{theme::ColorfulTheme, Confirm, Input, Select};
+use loading::Loading;
+use crate::api::make_api;
+use crate::templates::rust::create_rust_plugin_project;
+use crate::utils::plugin::{Lang, PluginConfig, string_to_lang};
+>>>>>>> 85173fa (feat: first commit)
 
 #[derive(Subcommand)]
 pub enum PluginCommand {
@@ -30,7 +40,17 @@ impl PluginCommand {
             ..ColorfulTheme::default()
         };
 
+<<<<<<< HEAD
         let lang_list = &["Rust", "Typescript", "Javascript", "Golang", "PHP"];
+=======
+        let lang_list = &[
+            "Rust",
+            "Typescript",
+            "Javascript",
+            "Golang",
+            "PHP",
+        ];
+>>>>>>> 85173fa (feat: first commit)
 
         println!("Welcome to Wakflo.AI new plugin setup wizard");
 
@@ -50,6 +70,7 @@ impl PluginCommand {
 
         #[allow(unused_assignments)]
         let mut plugin_name = String::new();
+<<<<<<< HEAD
         if name.is_none() {
             plugin_name = Input::with_theme(&theme)
                 .with_prompt("Name (plugin name)")
@@ -57,27 +78,47 @@ impl PluginCommand {
                 .expect("missing");
         } else {
             plugin_name = name.unwrap_or_default();
+=======
+        if let None = name {
+            plugin_name = Input::with_theme(&theme)
+                .with_prompt("Name (plugin name)")
+                .interact_text().expect("missing");
+        } else {
+            plugin_name = name.expect("plugin name missing");
+>>>>>>> 85173fa (feat: first commit)
         }
 
         let description: String = Input::with_theme(&theme)
             .with_prompt("Description")
             .allow_empty(true)
+<<<<<<< HEAD
             .interact()
             .expect("missing description");
+=======
+            .interact().expect("missing");
+>>>>>>> 85173fa (feat: first commit)
 
         let category_idx = Select::with_theme(&ColorfulTheme::default())
             .with_prompt("Select a category")
             .default(0)
             .items(&category_ids.clone())
             .interact()
+<<<<<<< HEAD
             .expect("missing category");
+=======
+            .unwrap();
+>>>>>>> 85173fa (feat: first commit)
 
         let lang_idx = Select::with_theme(&ColorfulTheme::default())
             .with_prompt("Select a language")
             .default(0)
             .items(&lang_list[..])
             .interact()
+<<<<<<< HEAD
             .expect("missing lang");
+=======
+            .unwrap();
+>>>>>>> 85173fa (feat: first commit)
 
         let lang = lang_list[lang_idx];
         let cat = category_ids.get(category_idx).expect("missing category");
@@ -104,4 +145,8 @@ impl PluginCommand {
             Lang::Php => Ok(()),
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 85173fa (feat: first commit)
