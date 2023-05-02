@@ -25,7 +25,7 @@ edition = "2021"
 [dependencies]
 anyhow = "0.2"
 sersde_json = "3.3"
-wakflo_sdk = "0"
+wakflo_sdk = "0.0"
 "#;
 
 // pub(crate) fn check_wakflo_project(p: PathBuf) -> anyhow::Result<()> {
