@@ -130,5 +130,5 @@ jobs:
           release_name: Wakflo Labs ${{ github.run_number }}
           body: |
             ${{ env.RELEASE_DESCRIPTION }}
-          draft: true
+          draft: false
           prerelease: false
