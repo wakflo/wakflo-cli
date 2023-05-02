@@ -1,13 +1,13 @@
 use crate::api::make_api;
 use crate::templates::rust::create_rust_plugin_project;
-use crate::utils::plugin::{string_to_lang, Lang, PluginConfig};
+use crate::utils::plugin::{string_to_lang, Lang, TaskConfig};
 use clap::Subcommand;
 use console::Style;
 use dialoguer::{theme::ColorfulTheme, Confirm, Input, Select};
 use loading::Loading;
 
 #[derive(Subcommand)]
-pub enum PluginCommand {
+pub enum TaskCommand {
     /// generates new wakflo plugin
     #[command(arg_required_else_help = false)]
     New {
@@ -19,7 +19,7 @@ pub enum PluginCommand {
     Run,
 }
 
-impl PluginCommand {
+impl TaskCommand {
     pub fn run_plugin() -> anyhow::Result<()> {
         Ok(())
     }
@@ -84,17 +84,17 @@ impl PluginCommand {
 
         let loading = &Loading::default();
         loading.text(format!("Login creating plugin in {}", lang));
-        let config = PluginConfig {
+        let config = TaskConfig {
             description,
             name: plugin_name,
             lang: string_to_lang(lang),
             category: cat.clone(),
         };
 
-        PluginCommand::create_plugin(config, loading)
+        TaskCommand::create_plugin(config, loading)
     }
 
-    fn create_plugin(config: PluginConfig, loading: &Loading) -> anyhow::Result<()> {
+    fn create_plugin(config: TaskConfig, loading: &Loading) -> anyhow::Result<()> {
         match config.lang {
             Lang::Rust => create_rust_plugin_project(config, loading),
             Lang::Typescript => Ok(()),

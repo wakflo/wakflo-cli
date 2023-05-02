@@ -1,10 +1,10 @@
 mod auth;
-mod plugin;
+mod task;
 
 use crate::utils::dir_files::setup_wakflo_dir;
 use auth::AuthCommand;
 use clap::{CommandFactory, Parser, Subcommand};
-use plugin::PluginCommand;
+use task::TaskCommand;
 
 // #[derive(Debug, Args)]
 // struct GlobalOpts {
@@ -39,10 +39,10 @@ enum Commands {
         auth: AuthCommand,
     },
 
-    /// Plugins commands
-    Plugin {
+    /// Tasks commands
+    Task {
         #[clap(subcommand)]
-        plugin: PluginCommand,
+        plugin: TaskCommand,
     },
     /// Generate shell completions
     Completions {
@@ -68,11 +68,11 @@ impl WakfloCli {
                 AuthCommand::Whoami => AuthCommand::whoami(),
                 AuthCommand::Logout => Ok(()),
             },
-            Commands::Plugin { plugin } => match plugin {
-                PluginCommand::New { name } => PluginCommand::new_plugin(name),
-                PluginCommand::Publish => Ok(()),
-                PluginCommand::Test => Ok(()),
-                PluginCommand::Run => PluginCommand::run_plugin(),
+            Commands::Task { plugin } => match plugin {
+                TaskCommand::New { name } => TaskCommand::new_plugin(name),
+                TaskCommand::Publish => Ok(()),
+                TaskCommand::Test => Ok(()),
+                TaskCommand::Run => TaskCommand::run_plugin(),
             },
         };
 

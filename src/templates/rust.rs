@@ -1,4 +1,4 @@
-use crate::utils::plugin::{generate_shared_plugin_files, resolve_variables, PluginConfig};
+use crate::utils::plugin::{generate_shared_plugin_files, resolve_variables, TaskConfig};
 use anyhow::bail;
 use convert_case::{Case, Casing};
 use loading::Loading;
@@ -35,7 +35,7 @@ wakflo_sdk = "0.0"
 // }
 
 pub(crate) fn create_rust_plugin_project(
-    config: PluginConfig,
+    config: TaskConfig,
     loading: &Loading,
 ) -> anyhow::Result<()> {
     let dir_name = config.name.to_case(Case::Kebab).to_lowercase();

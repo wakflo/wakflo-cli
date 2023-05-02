@@ -17,14 +17,14 @@ pub(crate) enum Lang {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
-pub(crate) struct PluginConfig {
+pub(crate) struct TaskConfig {
     pub name: String,
     pub description: String,
     pub lang: Lang,
     pub category: String,
 }
 
-pub(crate) fn resolve_variables(code: &str, config: &PluginConfig) -> anyhow::Result<String> {
+pub(crate) fn resolve_variables(code: &str, config: &TaskConfig) -> anyhow::Result<String> {
     let name = config.name.to_case(Case::Kebab).to_lowercase();
     let template = liquid::ParserBuilder::with_stdlib()
         .build()
@@ -79,7 +79,7 @@ pub(crate) const PROPERTIES: &str = r#"{
 "#;
 
 /// generate wakflo plugin config
-pub(crate) fn generate_shared_plugin_files(config: &PluginConfig) -> anyhow::Result<()> {
+pub(crate) fn generate_shared_plugin_files(config: &TaskConfig) -> anyhow::Result<()> {
     let dir_name = config.name.clone().to_case(Case::Kebab).to_lowercase();
 
     let mut resolved_str = resolve_variables(WAKFLO_TOML, config)?;
