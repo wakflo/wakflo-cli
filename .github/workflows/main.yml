@@ -126,7 +126,7 @@ jobs:
           package-name: wakflo
           default-branch: main
           signoff: "xraph <rex@wakflo.com>"
-          token: ${{ secrets.GITHUB_TOKEN }} # <-- PAT secret name
+          token: ${{ secrets.GIT_RELEASE_TOKEN }} # <-- PAT secret name
         env:
           CARGO_REGISTRY_TOKEN: ${{ secrets.CRATES_IO_TOKEN }}
 
