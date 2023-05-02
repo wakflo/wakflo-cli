@@ -75,7 +75,7 @@ jobs:
 
   crate-publish:
     name: "Publish Crate"
-    if: contains(github.ref, 'release')
+    if: github.ref == 'refs/heads/main'
 
     needs:
       - lint-test
