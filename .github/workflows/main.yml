@@ -74,11 +74,15 @@ jobs:
           args: run --all ${{ matrix.flags }}
 
   crate-publish:
-    name: "Publish Crate"
-    if: github.ref == 'refs/heads/main'
-
+    name: "Publish release"
     needs:
       - lint-test
+    if: github.ref == 'refs/heads/main'
+
+    permissions:
+      id-token: write # Enable OIDC
+      pull-requests: write
+      contents: write
 
     strategy:
       fail-fast: false
@@ -98,14 +102,6 @@ jobs:
 
       - name: Fetch tags
         run: git fetch --tags
-
-      - name: Wait for tests to complete
-        uses: lewagon/wait-on-check-action@v1.3.1
-        with:
-          ref: ${{ github.ref }}
-          check-name: 'Tests'
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          wait-interval: 10
 
       - uses: chainguard-dev/actions/setup-gitsign@main
 
@@ -135,4 +131,4 @@ jobs:
           body: |
             ${{ env.RELEASE_DESCRIPTION }}
           draft: true
-          prerelease: true
+          prerelease: false
