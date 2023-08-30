@@ -5,18 +5,48 @@ use std::fs;
 use std::process::Command;
 
 pub(crate) fn cargo_build(module: &WakfloExtension, loading: &Loading) -> anyhow::Result<()> {
-    let output = Command::new("cargo")
-        // .arg("wasi")
-        .arg("build")
-        .arg("--release")
-        .arg("--target")
-        .arg("wasm32-wasi")
-        .env("LS_COLORS", "rs=0:di=38;5;27:mh=44;38;5;15")
-        .output()
-        .expect("failed to execute process");
+    let cmd = match module.plugin.language {
+        PluginLanguage::Rust => Command::new("cargo")
+            // .arg("wasi")
+            .arg("build")
+            .arg("--release")
+            .arg("--target")
+            .arg("wasm32-wasi")
+            .env("LS_COLORS", "rs=0:di=38;5;27:mh=44;38;5;15")
+            .output(),
+
+        PluginLanguage::Golang => {
+            // set dist folder
+            setup_build_output().expect("not handled");
+
+            // final binary output path
+            let dest_path = format!(
+                "dist/{}.wasm",
+                module.plugin.name.clone()
+            );
+
+            Command::new("tinygo")
+                .arg("build")
+                // .arg("-wasm-abi=generic")
+                .arg("-target=wasi")
+                .arg("-gc=leaking")
+                .arg("-o")
+                .arg("main.go")
+                .arg(dest_path)
+                .env("LS_COLORS", "rs=0:di=38;5;27:mh=44;38;5;15")
+                .output()
+        },
+        _ => anyhow::bail!("Sorry unsupported language")
+    };
+
+    let output = cmd.expect("failed to execute process");
 
     if !output.status.success() {
         anyhow::bail!("error: {}", String::from_utf8_lossy(&output.stderr));
+    }
+
+    if module.plugin.language != PluginLanguage::Rust {
+        return Ok(())
     }
 
     // run post process build

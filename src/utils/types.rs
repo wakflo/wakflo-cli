@@ -37,6 +37,7 @@ pub(crate) struct WakfloResponse<T> {
     Debug,
     Serialize,
     Deserialize,
+    PartialEq,
     strum_macros::AsRefStr,
     strum_macros::EnumString,
     strum_macros::IntoStaticStr,
