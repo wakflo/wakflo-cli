@@ -58,9 +58,7 @@ pub(crate) fn create_go_plugin_project(
     fs::create_dir(path::Path::new(format!("{}/tests", dir_name).as_str()))?;
 
     resolved_str = resolve_variables(MAIN_GO, &config)?;
-    file = fs::File::create(path::Path::new(
-        format!("{}/main.go", dir_name).as_str(),
-    ))?;
+    file = fs::File::create(path::Path::new(format!("{}/main.go", dir_name).as_str()))?;
     file.write_all(resolved_str.as_bytes())?;
 
     loading.success("created plugin successfully   ✅");

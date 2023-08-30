@@ -33,26 +33,31 @@ pub(crate) struct WakfloResponse<T> {
     pub data: T,
 }
 
-#[derive(Debug, Serialize, Deserialize, strum_macros::AsRefStr, strum_macros::EnumString, strum_macros::IntoStaticStr)]
-pub(crate) enum  PluginLanguage {
+#[derive(
+    Debug,
+    Serialize,
+    Deserialize,
+    strum_macros::AsRefStr,
+    strum_macros::EnumString,
+    strum_macros::IntoStaticStr,
+)]
+pub(crate) enum PluginLanguage {
     Rust,
     Typescript,
     Javascript,
     Golang,
-    PHP
+    Zig,
 }
-
 
 #[derive(Debug, Serialize, Deserialize)]
 pub(crate) struct WakfloExtension {
     pub plugin: WakfloPlugin,
 }
 
-
 #[derive(Debug, Serialize, Deserialize)]
 pub(crate) struct WakfloPlugin {
     pub name: String,
     pub version: String,
     pub description: String,
-    pub language: PluginLanguage
+    pub language: PluginLanguage,
 }

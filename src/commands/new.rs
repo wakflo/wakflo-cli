@@ -1,11 +1,11 @@
 use crate::api::make_api;
+use crate::templates::go::create_go_plugin_project;
 use crate::templates::rust::create_rust_plugin_project;
 use crate::utils::plugin::{string_to_lang, Lang, TaskConfig};
 use clap::Subcommand;
 use console::Style;
 use dialoguer::{theme::ColorfulTheme, Confirm, Input, Select};
 use loading::Loading;
-use crate::templates::go::create_go_plugin_project;
 
 #[derive(Subcommand)]
 pub enum NewCommand {
@@ -24,7 +24,7 @@ impl NewCommand {
             ..ColorfulTheme::default()
         };
 
-        let lang_list = &["Rust", "Typescript", "Javascript", "Golang", "PHP"];
+        let lang_list = &["Rust", "Golang"];
 
         println!("Welcome to Wakflo.AI new plugin setup wizard");
 
@@ -95,7 +95,7 @@ impl NewCommand {
             Lang::Javascript => Ok(()),
             Lang::Golang => create_go_plugin_project(config, loading),
             Lang::Python => Ok(()),
-            Lang::Php => Ok(()),
+            Lang::Zig => Ok(()),
         }
     }
 }

@@ -1,8 +1,8 @@
-use std::fs;
-use std::process::Command;
-use loading::Loading;
 use crate::utils::dir_files::{get_root_dir, setup_build_output};
 use crate::utils::types::{PluginLanguage, WakfloExtension};
+use loading::Loading;
+use std::fs;
+use std::process::Command;
 
 pub(crate) fn cargo_build(module: &WakfloExtension, loading: &Loading) -> anyhow::Result<()> {
     let output = Command::new("cargo")
@@ -34,10 +34,20 @@ pub(crate) fn copy_rust_binary(module: &WakfloExtension) -> anyhow::Result<()> {
     match root_dir {
         None => {}
         Some(dir) => {
-            let from = dir.clone().join(format!("target/wasm32-wasi/release/{}.wasm", module.plugin.name.clone()));
-            let to = dir.clone().join(format!("dist/{}.wasm", module.plugin.name.clone()));
-            let from_d = dir.clone().join(format!("target/wasm32-wasi/release/{}.d", module.plugin.name.clone()));
-            let to_d = dir.clone().join(format!("dist/{}.d", module.plugin.name.clone()));
+            let from = dir.clone().join(format!(
+                "target/wasm32-wasi/release/{}.wasm",
+                module.plugin.name.clone()
+            ));
+            let to = dir
+                .clone()
+                .join(format!("dist/{}.wasm", module.plugin.name.clone()));
+            let from_d = dir.clone().join(format!(
+                "target/wasm32-wasi/release/{}.d",
+                module.plugin.name.clone()
+            ));
+            let to_d = dir
+                .clone()
+                .join(format!("dist/{}.d", module.plugin.name.clone()));
             fs::copy(from, to)?;
             fs::copy(from_d, to_d)?;
         }
@@ -72,7 +82,7 @@ pub(crate) fn cargo_build_postprocess(module: &WakfloExtension) -> anyhow::Resul
         PluginLanguage::Typescript => {}
         PluginLanguage::Javascript => {}
         PluginLanguage::Golang => {}
-        PluginLanguage::PHP => {}
+        PluginLanguage::Zig => {}
     }
 
     Ok(())

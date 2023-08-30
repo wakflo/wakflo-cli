@@ -1,8 +1,8 @@
-use clap::Subcommand;
-use loading::Loading;
 use crate::api::make_api;
 use crate::utils::build::{cargo_build, cargo_test};
 use crate::utils::dir_files::{fetch_wakflo_plugin_config, get_bundle_plugin_paths};
+use clap::Subcommand;
+use loading::Loading;
 
 #[derive(Subcommand)]
 pub enum GlobalCommand {
@@ -20,14 +20,14 @@ impl GlobalCommand {
     pub fn build_plugin() -> anyhow::Result<()> {
         let wakflo = fetch_wakflo_plugin_config().expect("failed to find wakflo plugin config");
         if wakflo.is_none() {
-            return Ok(())
+            return Ok(());
         }
 
         let loading = Loading::default();
         loading.text("Compiling plugin ...");
 
         // run cargo build
-        match cargo_build(&wakflo.unwrap(), &loading){
+        match cargo_build(&wakflo.unwrap(), &loading) {
             Ok(_) => loading.success("Compiled binary"),
             Err(e) => {
                 loading.fail(e);
@@ -50,11 +50,12 @@ impl GlobalCommand {
     pub fn deploy_plugin() -> anyhow::Result<()> {
         let loading = &Loading::default();
         loading.text("preparing metadata...");
-        let wakflo_option = fetch_wakflo_plugin_config().expect("failed to find wakflo plugin config");
+        let wakflo_option =
+            fetch_wakflo_plugin_config().expect("failed to find wakflo plugin config");
         if wakflo_option.is_none() {
             loading.fail("invalid wakflo project");
             loading.end();
-            return Ok(())
+            return Ok(());
         }
 
         loading.text("validating plugin...");
@@ -65,7 +66,7 @@ impl GlobalCommand {
 
         loading.text("Compiling plugin ...");
         // run cargo build
-        match cargo_build(&wakflo, &loading){
+        match cargo_build(&wakflo, loading) {
             Ok(_) => loading.success("Compiled binary"),
             Err(e) => {
                 loading.fail(e);
@@ -75,9 +76,11 @@ impl GlobalCommand {
         };
 
         loading.text("uploading plugin...");
-        match make_api().upload.upload_file(wakflo, plugin_path){
+        match make_api().upload.upload_file(wakflo, plugin_path) {
             Ok(_) => {
-                loading.success(format!("{name} plugin with version {version} deployed successfully"));
+                loading.success(format!(
+                    "{name} plugin with version {version} deployed successfully"
+                ));
             }
             Err(e) => {
                 loading.fail(e.to_string());

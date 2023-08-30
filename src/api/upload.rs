@@ -1,8 +1,8 @@
-use std::path::{PathBuf};
-use anyhow::bail;
 use crate::utils::dir_files::get_wakflo_config;
-use ureq_multipart::MultipartBuilder;
 use crate::utils::types::WakfloExtension;
+use anyhow::bail;
+use std::path::PathBuf;
+use ureq_multipart::MultipartBuilder;
 
 pub struct WakfloUploadApi {
     base_url: String,
@@ -14,7 +14,11 @@ impl WakfloUploadApi {
         WakfloUploadApi { base_url, client }
     }
 
-    pub(crate) fn upload_file(&self, wakflo: WakfloExtension, file_path: PathBuf) -> anyhow::Result<()> {
+    pub(crate) fn upload_file(
+        &self,
+        wakflo: WakfloExtension,
+        file_path: PathBuf,
+    ) -> anyhow::Result<()> {
         let url = format!("{}{}", self.base_url, "/registry/upload/test");
         let mut req = self.client.post(url.as_str());
 
@@ -37,27 +41,37 @@ impl WakfloUploadApi {
         let name = wakflo.plugin.name.as_str();
 
         let (content_type, data) = MultipartBuilder::new()
-            .add_file("file", file_path).unwrap()
-            .add_text("name",name).unwrap()
-            .add_text("language", lang).unwrap()
-            .add_text("version", version).unwrap()
-            .add_text("description", description).unwrap()
-            .finish().unwrap();
+            .add_file("file", file_path)
+            .unwrap()
+            .add_text("name", name)
+            .unwrap()
+            .add_text("language", lang)
+            .unwrap()
+            .add_text("version", version)
+            .unwrap()
+            .add_text("description", description)
+            .unwrap()
+            .finish()
+            .unwrap();
 
-        match req.set("Content-Type", &content_type)
-            .send_bytes(data.as_slice()) {
+        match req
+            .set("Content-Type", &content_type)
+            .send_bytes(data.as_slice())
+        {
             Ok(_) => Ok(()),
             Err(e) => {
-                if let Some(rsp) = e.into_response(){
+                if let Some(rsp) = e.into_response() {
                     let status = rsp.status();
                     let msg = rsp.into_string().unwrap();
 
                     #[allow(unreachable_code)]
                     return if status == 409 {
-                        bail!(format!("{name} plugin with version {version} already deployed"))
+                        bail!(format!(
+                            "{name} plugin with version {version} already deployed"
+                        ))
                     } else {
                         bail!(msg)
-                    }
+                    };
                 }
 
                 Ok(())

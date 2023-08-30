@@ -1,12 +1,12 @@
 mod auth;
-mod new;
 mod global;
+mod new;
 
-use crate::utils::dir_files::{setup_wakflo_dir};
-use auth::AuthCommand;
-use clap::{CommandFactory, Parser, Subcommand};
 use crate::commands::global::GlobalCommand;
 use crate::commands::new::NewCommand;
+use crate::utils::dir_files::setup_wakflo_dir;
+use auth::AuthCommand;
+use clap::{CommandFactory, Parser, Subcommand};
 use regex::Regex;
 
 /// Wakflo
@@ -86,7 +86,7 @@ impl WakfloCli {
             let raw_msg = e.to_string().clone();
             let re = Regex::new(r"^https?:\\/\\/(?:www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b(?:[-a-zA-Z0-9()@:%_\\+.~#?&\\/=]*)$").expect("");
             let msg = re.replace_all(raw_msg.as_str(), "");
-            println!("oops!: {}", msg.to_string())
+            println!("oops!: {}", msg)
         }
 
         Ok(())

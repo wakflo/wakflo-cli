@@ -1,9 +1,9 @@
 use crate::utils::types::{WakfloConfig, WakfloExtension};
-use std::{env, fs};
+use loading::Loading;
 use std::fs::DirEntry;
 use std::io::Write;
 use std::path::PathBuf;
-use loading::Loading;
+use std::{env, fs};
 
 pub(crate) fn setup_wakflo_dir() -> anyhow::Result<()> {
     let home_dir = dirs::home_dir().expect("can't read home path");
@@ -29,7 +29,7 @@ pub(crate) fn setup_wakflo_dir() -> anyhow::Result<()> {
 pub(crate) fn setup_build_output() -> anyhow::Result<()> {
     let root_dir = get_root_dir()?;
     if root_dir.is_none() {
-       return  Ok(())
+        return Ok(());
     }
 
     let mut current_dir = root_dir.expect("");
@@ -77,36 +77,56 @@ pub(crate) fn get_root_dir() -> anyhow::Result<Option<PathBuf>> {
 
 fn _find_root_dir(dir: PathBuf, mut count: i8) -> anyhow::Result<Option<PathBuf>> {
     let temp_dir = fs::read_dir(dir.clone())?.find(|x| {
-        x.as_ref().expect("").file_name().eq("wakflo.toml") && x.clone().as_ref().expect("").file_type().expect("").is_file()
+        x.as_ref().expect("").file_name().eq("wakflo.toml")
+            && x.clone()
+                .as_ref()
+                .expect("")
+                .file_type()
+                .expect("")
+                .is_file()
     });
 
     if let Some(d) = temp_dir {
-        let d = d.expect("").path().into_os_string().into_string().expect("");
-        return Ok(Some(PathBuf::from(d.replace("wakflo.toml", ""))))
+        let d = d
+            .expect("")
+            .path()
+            .into_os_string()
+            .into_string()
+            .expect("");
+        return Ok(Some(PathBuf::from(d.replace("wakflo.toml", ""))));
     }
 
     if count == MAX_DIR_SCAN_DEPTH {
-        return Ok(None)
+        return Ok(None);
     }
 
-    count = count + 1;
+    count += 1;
     _find_root_dir(dir.join(".."), count)
 }
 
-pub(crate) fn find_wakflo_plugin_file(dir: PathBuf, mut count: i8) -> anyhow::Result<Option<DirEntry>> {
+pub(crate) fn find_wakflo_plugin_file(
+    dir: PathBuf,
+    mut count: i8,
+) -> anyhow::Result<Option<DirEntry>> {
     let temp_dir = fs::read_dir(dir.clone())?.find(|x| {
-        x.as_ref().expect("").file_name().eq("wakflo.toml") && x.clone().as_ref().expect("").file_type().expect("").is_file()
+        x.as_ref().expect("").file_name().eq("wakflo.toml")
+            && x.clone()
+                .as_ref()
+                .expect("")
+                .file_type()
+                .expect("")
+                .is_file()
     });
 
     if let Some(d) = temp_dir {
-        return Ok(Some(d.expect("")))
+        return Ok(Some(d.expect("")));
     }
 
     if count == MAX_DIR_SCAN_DEPTH {
-        return Ok(None)
+        return Ok(None);
     }
 
-    count = count + 1;
+    count += 1;
     find_wakflo_plugin_file(dir.join(".."), count)
 }
 
@@ -115,8 +135,6 @@ pub(crate) fn parse_plugin_file_to_type(file_path: DirEntry) -> anyhow::Result<W
     Ok(toml::from_str::<WakfloExtension>(file_bytes.as_str())?)
 }
 
-
-
 pub(crate) fn fetch_wakflo_plugin_config() -> anyhow::Result<Option<WakfloExtension>> {
     let loading = Loading::default();
     let current_dir = env::current_dir().expect("can't read home path");
@@ -124,7 +142,7 @@ pub(crate) fn fetch_wakflo_plugin_config() -> anyhow::Result<Option<WakfloExtens
     if file_path.is_none() {
         loading.fail("failed to find wakflo plugin dir, please run this command in a plugin dir");
         loading.end();
-        return Ok(None)
+        return Ok(None);
     }
 
     let wakflo = parse_plugin_file_to_type(file_path.expect(""))?;

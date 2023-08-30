@@ -14,7 +14,7 @@ pub(crate) enum Lang {
     Javascript,
     Golang,
     Python,
-    Php,
+    Zig,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -85,7 +85,8 @@ pub(crate) fn generate_shared_plugin_files(config: &TaskConfig) -> anyhow::Resul
     wak.plugin.name = dir_name.clone();
     wak.plugin.description = config.description.to_owned();
     wak.plugin.category = config.category.to_owned();
-    wak.plugin.icon = "streamline:programming-module-cube-code-module-programming-plugin".to_owned();
+    wak.plugin.icon =
+        "streamline:programming-module-cube-code-module-programming-plugin".to_owned();
     wak.plugin.documentation = Some("".to_owned());
 
     wak.dependencies = Some(vec![]);
@@ -118,8 +119,8 @@ pub(crate) fn string_to_lang(lang: &str) -> Lang {
         Lang::Typescript
     } else if lang == "Javascript" {
         Lang::Javascript
-    } else if lang == "PHP" {
-        Lang::Php
+    } else if lang == "Zig" {
+        Lang::Zig
     } else {
         Lang::Rust
     }
