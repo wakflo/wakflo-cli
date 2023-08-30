@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub(crate) struct LoginResponse {
     #[serde(rename = "accessToken")]
     pub access_token: String,
@@ -31,4 +31,28 @@ pub(crate) struct PluginCategory {
 #[derive(Debug, Serialize, Deserialize)]
 pub(crate) struct WakfloResponse<T> {
     pub data: T,
+}
+
+#[derive(Debug, Serialize, Deserialize, strum_macros::AsRefStr, strum_macros::EnumString, strum_macros::IntoStaticStr)]
+pub(crate) enum  PluginLanguage {
+    Rust,
+    Typescript,
+    Javascript,
+    Golang,
+    PHP
+}
+
+
+#[derive(Debug, Serialize, Deserialize)]
+pub(crate) struct WakfloExtension {
+    pub plugin: WakfloPlugin,
+}
+
+
+#[derive(Debug, Serialize, Deserialize)]
+pub(crate) struct WakfloPlugin {
+    pub name: String,
+    pub version: String,
+    pub description: String,
+    pub language: PluginLanguage
 }

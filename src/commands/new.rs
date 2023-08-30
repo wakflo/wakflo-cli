@@ -5,26 +5,20 @@ use clap::Subcommand;
 use console::Style;
 use dialoguer::{theme::ColorfulTheme, Confirm, Input, Select};
 use loading::Loading;
+use crate::templates::go::create_go_plugin_project;
 
 #[derive(Subcommand)]
-pub enum TaskCommand {
-    /// generates new wakflo plugin
+pub enum NewCommand {
+    /// generates new wakflo task plugin
     #[command(arg_required_else_help = false)]
-    New {
+    Task {
         /// name of the plugin
         name: Option<String>,
     },
-    Publish,
-    Test,
-    Run,
 }
 
-impl TaskCommand {
-    pub fn run_plugin() -> anyhow::Result<()> {
-        Ok(())
-    }
-
-    pub fn new_plugin(name: Option<String>) -> anyhow::Result<()> {
+impl NewCommand {
+    pub fn new_task(name: Option<String>) -> anyhow::Result<()> {
         let theme = ColorfulTheme {
             values_style: Style::new().yellow().dim(),
             ..ColorfulTheme::default()
@@ -91,7 +85,7 @@ impl TaskCommand {
             category: cat.clone(),
         };
 
-        TaskCommand::create_plugin(config, loading)
+        NewCommand::create_plugin(config, loading)
     }
 
     fn create_plugin(config: TaskConfig, loading: &Loading) -> anyhow::Result<()> {
@@ -99,7 +93,7 @@ impl TaskCommand {
             Lang::Rust => create_rust_plugin_project(config, loading),
             Lang::Typescript => Ok(()),
             Lang::Javascript => Ok(()),
-            Lang::Golang => Ok(()),
+            Lang::Golang => create_go_plugin_project(config, loading),
             Lang::Python => Ok(()),
             Lang::Php => Ok(()),
         }

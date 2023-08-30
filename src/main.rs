@@ -6,8 +6,10 @@ mod utils;
 use commands::WakfloCli;
 use human_panic::setup_panic;
 
-fn main() {
+#[tokio::main]
+pub async fn main() -> std::io::Result<()> {
     setup_panic!();
 
-    WakfloCli::init().expect("something wrong");
+    WakfloCli::init().expect("something went wrong");
+    Ok(())
 }

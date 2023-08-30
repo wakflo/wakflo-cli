@@ -5,6 +5,7 @@ use std::io::Write;
 use std::{fs, path};
 use strum_macros::AsRefStr;
 use strum_macros::{EnumIter, EnumString};
+use wakflo_sdk::Wakflo;
 
 #[derive(Debug, Serialize, Deserialize, EnumString, EnumIter, AsRefStr)]
 pub(crate) enum Lang {
@@ -60,7 +61,6 @@ Getting Started
 
 pub(crate) const PROPERTIES: &str = r#"{
   "input": {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
     "title": "Input",
     "type": "object",
     "properties": {
@@ -68,7 +68,6 @@ pub(crate) const PROPERTIES: &str = r#"{
     }
   },
   "output": {
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
     "title": "Output",
     "type": "object",
     "properties": {
@@ -81,6 +80,15 @@ pub(crate) const PROPERTIES: &str = r#"{
 /// generate wakflo plugin config
 pub(crate) fn generate_shared_plugin_files(config: &TaskConfig) -> anyhow::Result<()> {
     let dir_name = config.name.clone().to_case(Case::Kebab).to_lowercase();
+
+    let mut wak = Wakflo::default();
+    wak.plugin.name = dir_name.clone();
+    wak.plugin.description = config.description.to_owned();
+    wak.plugin.category = config.category.to_owned();
+    wak.plugin.icon = "streamline:programming-module-cube-code-module-programming-plugin".to_owned();
+    wak.plugin.documentation = Some("".to_owned());
+
+    wak.dependencies = Some(vec![]);
 
     let mut resolved_str = resolve_variables(WAKFLO_TOML, config)?;
     let mut file = fs::File::create(path::Path::new(

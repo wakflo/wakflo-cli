@@ -1,21 +1,13 @@
 mod auth;
-mod task;
+mod new;
+mod global;
 
-use crate::utils::dir_files::setup_wakflo_dir;
+use crate::utils::dir_files::{setup_wakflo_dir};
 use auth::AuthCommand;
 use clap::{CommandFactory, Parser, Subcommand};
-use task::TaskCommand;
-
-// #[derive(Debug, Args)]
-// struct GlobalOpts {
-//     /// Color
-//     #[clap(long, global = true, default_value_t = Color::Auto)]
-//     color: Color,
-//
-//     /// Verbosity level (can be specified multiple times)
-//     #[clap(long, short, global = true, parse(from_occurrences))]
-//     verbose: usize,
-// }
+use crate::commands::global::GlobalCommand;
+use crate::commands::new::NewCommand;
+use regex::Regex;
 
 /// Wakflo
 ///
@@ -39,11 +31,24 @@ enum Commands {
         auth: AuthCommand,
     },
 
-    /// Tasks commands
-    Task {
+    /// New plugins commands
+    New {
         #[clap(subcommand)]
-        plugin: TaskCommand,
+        plugin: NewCommand,
     },
+
+    /// Tests the current wakflo plugin
+    Test,
+
+    /// Builds the current wakflo plugin
+    Build,
+
+    /// Run the current wakflo plugin
+    Run,
+
+    /// Deploys the current wakflo plugin
+    Deploy,
+
     /// Generate shell completions
     Completions {
         /// The shell to generate the completions for
@@ -68,20 +73,21 @@ impl WakfloCli {
                 AuthCommand::Whoami => AuthCommand::whoami(),
                 AuthCommand::Logout => Ok(()),
             },
-            Commands::Task { plugin } => match plugin {
-                TaskCommand::New { name } => TaskCommand::new_plugin(name),
-                TaskCommand::Publish => Ok(()),
-                TaskCommand::Test => Ok(()),
-                TaskCommand::Run => TaskCommand::run_plugin(),
+            Commands::New { plugin } => match plugin {
+                NewCommand::Task { name } => NewCommand::new_task(name),
             },
+            Commands::Test => GlobalCommand::test_plugin(),
+            Commands::Run => GlobalCommand::run_plugin(),
+            Commands::Build => GlobalCommand::build_plugin(),
+            Commands::Deploy => GlobalCommand::deploy_plugin(),
         };
 
         if let Err(e) = rsp {
-            // loading.fail(format!("{}", e))
-            println!("{}", e)
+            let raw_msg = e.to_string().clone();
+            let re = Regex::new(r"^https?:\\/\\/(?:www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b(?:[-a-zA-Z0-9()@:%_\\+.~#?&\\/=]*)$").expect("");
+            let msg = re.replace_all(raw_msg.as_str(), "");
+            println!("oops!: {}", msg.to_string())
         }
-
-        // loading.end();
 
         Ok(())
     }
