@@ -27,11 +27,10 @@ pub(crate) fn cargo_build(module: &WakfloExtension, loading: &Loading) -> anyhow
 
             Command::new("tinygo")
                 .arg("build")
-                // .arg("-wasm-abi=generic")
                 .arg("-target=wasi")
                 .arg("-gc=leaking")
                 .arg("-o")
-                .arg("main.go")
+                .arg("./main.go")
                 .arg(dest_path)
                 .env("LS_COLORS", "rs=0:di=38;5;27:mh=44;38;5;15")
                 .output()
@@ -121,6 +120,19 @@ pub(crate) fn cargo_build_postprocess(module: &WakfloExtension) -> anyhow::Resul
 pub(crate) fn cargo_test() {
     let output = Command::new("cargo")
         .arg("test")
+        .output()
+        .expect("failed to execute process");
+
+    println!("status: {}", output.status);
+    println!("stdout: {}", String::from_utf8_lossy(&output.stdout));
+    println!("stderr: {}", String::from_utf8_lossy(&output.stderr));
+}
+
+
+pub(crate) fn go_test() {
+    let output = Command::new("go")
+        .arg("test")
+        .arg("./...")
         .output()
         .expect("failed to execute process");
 

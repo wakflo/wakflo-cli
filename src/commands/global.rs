@@ -1,8 +1,9 @@
 use crate::api::make_api;
-use crate::utils::build::{cargo_build, cargo_test};
+use crate::utils::build::{cargo_build, cargo_test, go_test};
 use crate::utils::dir_files::{fetch_wakflo_plugin_config, get_bundle_plugin_paths};
 use clap::Subcommand;
 use loading::Loading;
+use crate::utils::types::{PluginLanguage};
 
 #[derive(Subcommand)]
 pub enum GlobalCommand {
@@ -42,8 +43,23 @@ impl GlobalCommand {
     }
 
     pub fn test_plugin() -> anyhow::Result<()> {
-        // run cargo test
-        cargo_test();
+        let wakflo = fetch_wakflo_plugin_config().expect("failed to find wakflo plugin config");
+        if wakflo.is_none() {
+            return Ok(());
+        }
+
+        match wakflo.expect("missing wakflo workspace").plugin.language {
+            PluginLanguage::Rust => {
+                // run cargo test
+                cargo_test();
+            }
+            PluginLanguage::Golang => {
+                // run go test
+                go_test();
+            }
+            _ => {}
+        };
+
         Ok(())
     }
 
